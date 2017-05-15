@@ -1,5 +1,7 @@
 import Html exposing (Html, text, div, button)
 import Html.Events exposing (onClick)
+import Views.Layout exposing (layout)
+import Views.Home exposing (home)
 
 type alias Model = Int
 model : Model
@@ -20,10 +22,7 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-  div []
-    [ button [onClick Decrement] [text "-"]
-    , div [] [text (toString model)]
-    , button [onClick Increment] [text "+"]]
+  layout home
 
 
 main =
