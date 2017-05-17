@@ -50,3 +50,8 @@ Continued to work on setting up views.
 Tried to input the editor html and it seems to have has some issues on a placeholder.
 I should report that.
 Also the footer seems to overlap with pages that have a large height.
+
+
+## May 16 2017 - 10:14 to 10:29
+Moved the routes out of Main and into Routes.
+Added some data structures that will need to be used with the Views.
