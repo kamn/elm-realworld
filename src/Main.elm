@@ -12,6 +12,8 @@ import Views.Settings exposing (settings)
 import Views.Login exposing (login)
 import Views.Register exposing (register)
 import Views.Profile exposing (profile)
+import Views.Editor exposing (editor)
+import Views.Article exposing (article)
 
 
 -- ROUTING
@@ -22,6 +24,8 @@ type Route
   | Login
   | Register
   | Profile
+  | Editor
+  | Article
   | NotFoundRoute
 
 route =
@@ -31,6 +35,8 @@ route =
     , map Login (s "login")
     , map Register (s "register")
     , map Profile (s "profile")
+    , map Editor (s "editor")
+    , map Article (s "article")
     ]
 
 
@@ -84,6 +90,10 @@ view model =
       layout register
     Profile ->
       layout profile
+    Editor ->
+      layout editor
+    Article ->
+      layout article
     NotFoundRoute ->
       layout (div [] [text "NotFound"])
 
