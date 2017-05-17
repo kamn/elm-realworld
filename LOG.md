@@ -44,3 +44,9 @@ I do think the example could be a little better.
 
 ## May 16 2017 - 8:57 to 9:12
 Started to import the other views into the product.
+
+## May 16 2017 - 9:13 to 9:28
+Continued to work on setting up views.
+Tried to input the editor html and it seems to have has some issues on a placeholder.
+I should report that.
+Also the footer seems to overlap with pages that have a large height.
