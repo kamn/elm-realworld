@@ -17,60 +17,24 @@ import Views.Article exposing (article)
 
 
 -- ROUTING
-
-type Route
-  = Home
-  | Settings
-  | Login
-  | Register
-  | Profile
-  | Editor
-  | Article
-  | NotFoundRoute
-
-route =
-  oneOf
-    [ map Home top
-    , map Settings (s "settings")
-    , map Login (s "login")
-    , map Register (s "register")
-    , map Profile (s "profile")
-    , map Editor (s "editor")
-    , map Article (s "article")
-    ]
-
-
-parseLocation: Location -> Route
-parseLocation location =
-  case (parseHash route location) of
-    Just r ->
-      r
-    Nothing ->
-      NotFoundRoute
+import Routes exposing (..)
 
 type alias Model = 
-  {
-    value: Int
-  , route: Route
+  { route: Route
   }
 
 model : Model
 model =
-  { value = 0
-  , route = Home
+  { route = Home
   }
 
 -- UPDATE
 
-type Msg = Increment | Decrement | UrlChange Navigation.Location
+type Msg = UrlChange Navigation.Location
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
-    Increment ->
-      (model, Cmd.none)
-    Decrement ->
-      (model, Cmd.none)
     UrlChange loc ->
       log loc.pathname
       log loc.hash
@@ -108,5 +72,3 @@ main =
   , update = update
   , subscriptions = (\_ -> Sub.none)
   }
-  --Html.beginnerProgram {model = model, view = view, update = update}
-
