@@ -3,6 +3,13 @@ module RealWorld.Routes exposing(Route(..), match, route)
 import Navigation exposing (Location)
 import UrlParser exposing (..)
 
-matchers =
+
+type Route
+  = Home
+  | Settings
+
+route =
   oneOf
-    [ map ]
+    [ map Home top
+    , map Settings "settings"
+    ]

@@ -1,22 +1,36 @@
 import Html exposing (Html, text, div, button)
 import Html.Events exposing (onClick)
-import Views.Layout exposing (layout)
-import Views.Home exposing (home)
+
 import Debug exposing (log)
 import Navigation exposing (Location)
 import UrlParser exposing (..)
+
+-- Views
+import Views.Layout exposing (layout)
+import Views.Home exposing (home)
+import Views.Settings exposing (settings)
+import Views.Login exposing (login)
+import Views.Register exposing (register)
+import Views.Profile exposing (profile)
+
 
 -- ROUTING
 
 type Route
   = Home
   | Settings
+  | Login
+  | Register
+  | Profile
   | NotFoundRoute
 
 route =
   oneOf
     [ map Home top
     , map Settings (s "settings")
+    , map Login (s "login")
+    , map Register (s "register")
+    , map Profile (s "profile")
     ]
 
 
@@ -63,9 +77,15 @@ view model =
     Home ->
       layout home
     Settings ->
-      div [] [text "Settings"]
-    _ ->
-      div [] [text "NotFound"]
+      layout settings
+    Login ->
+      layout login
+    Register ->
+      layout register
+    Profile ->
+      layout profile
+    NotFoundRoute ->
+      layout (div [] [text "NotFound"])
 
 
 init location =

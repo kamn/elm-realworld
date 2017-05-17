@@ -41,3 +41,6 @@ I will have to report an issue tomorrow
 Finally got the routing working.
 It was easy once I started to actually pay attention.
 I do think the example could be a little better.
+
+## May 16 2017 - 8:57 to 9:12
+Started to import the other views into the product.
