@@ -2,7 +2,7 @@ module Data.Profile exposing (..)
 
 type alias Profile =
   { username : String
-  , bio : String
+  , bio : Maybe String
   , image : String
   , following: Bool
   }

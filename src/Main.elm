@@ -17,6 +17,7 @@ import Views.Profile exposing (profile)
 import Views.Editor exposing (editor)
 import Views.Article exposing (article)
 
+import Data.Article exposing (Articles)
 
 -- ROUTING
 import Routes exposing (..)
@@ -34,7 +35,7 @@ model =
 
 type Msg 
   = UrlChange Navigation.Location
-  | ArticleReq (Result Http.Error String)
+  | ArticleReq (Result Http.Error Articles)
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
@@ -45,9 +46,11 @@ update msg model =
       log loc.href
       ({model | route = parseLocation loc}, Cmd.none)
     ArticleReq (Ok data) ->
-      (log data)
+      (log (toString data))
       (model, Cmd.none)
-    _ ->
+    ArticleReq (_) ->
+      (log "failed")
+      (log (toString msg))
       (model, Cmd.none)
 
 view : Model -> Html Msg

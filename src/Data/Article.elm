@@ -2,6 +2,10 @@ module Data.Article exposing (..)
 
 import Data.Profile exposing (Profile)
 
+type alias Articles =
+  { articles: List Article
+  }
+
 type alias Article = 
  { slug : String
  , title : String
