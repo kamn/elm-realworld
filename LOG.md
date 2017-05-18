@@ -51,7 +51,32 @@ Tried to input the editor html and it seems to have has some issues on a placeho
 I should report that.
 Also the footer seems to overlap with pages that have a large height.
 
-
 ## May 16 2017 - 10:14 to 10:29
 Moved the routes out of Main and into Routes.
 Added some data structures that will need to be used with the Views.
+Started to look into Json decoding
+
+## May 17 2017 - 6:55 to 7:10
+Added a data structure for comments.
+Started to use the data structures in the views for Articles.
+
+## May 17 2017 - 8:50 to 9:05
+Trying to figure out how to do requests in Elm
+
+## May 17 2017 - 9:06 to 9:21
+Figured a basic way of setting up the requests.
+I realize that I don't know much about Cmd.
+Read https://www.elm-tutorial.org/en/03-subs-cmds/02-commands.html
+
+## May 17 2017 - 9:52 to 10:07
+Looking into how to decode complex data types.
+https://github.com/NoRedInk/elm-decode-pipeline
+Seems like pipline is a better way to go than the default since they only go upto 8 props.
+I wonder how you do more than that?
+Started to decode the articles object
+
+## May 17 2017 - 10:08 to 10:23
+Continue work on decode.
+The example docs for elm-decode pipline need to have nullable imported.
+Got a basic decode of articles working! Alright!
+I think next I will work on displaying those articles correctly.
