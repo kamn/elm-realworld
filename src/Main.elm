@@ -1,9 +1,11 @@
 import Html exposing (Html, text, div, button)
-import Html.Events exposing (onClick)
 
 import Debug exposing (log)
 import Navigation exposing (Location)
 import UrlParser exposing (..)
+import Http
+
+import Request.General exposing (..)
 
 -- Views
 import Views.Layout exposing (layout)
@@ -30,7 +32,9 @@ model =
 
 -- UPDATE
 
-type Msg = UrlChange Navigation.Location
+type Msg 
+  = UrlChange Navigation.Location
+  | ArticleReq (Result Http.Error String)
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
@@ -40,6 +44,11 @@ update msg model =
       log loc.hash
       log loc.href
       ({model | route = parseLocation loc}, Cmd.none)
+    ArticleReq (Ok data) ->
+      (log data)
+      (model, Cmd.none)
+    _ ->
+      (model, Cmd.none)
 
 view : Model -> Html Msg
 view model =
@@ -63,7 +72,8 @@ view model =
 
 
 init location =
-  ({model | route = parseLocation location}, Cmd.none)
+  -- TODO Based on the location do different requests
+  ({model | route = parseLocation location}, (Http.send ArticleReq getArticles))
 
 main =
   Navigation.program UrlChange
