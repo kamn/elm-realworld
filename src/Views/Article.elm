@@ -2,40 +2,62 @@ module Views.Article exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Data.Article exposing (..)
+
+articleData = 
+    { slug = ""
+    , title = "How to build webapps that scale"
+    , description = ""
+    , body = ""
+    , tagList = []
+    , createdAt = ""
+    , updatedAt = ""
+    , favorited = False
+    , favoritesCount = 0
+    , author = 
+        { username = "Eric Simons"
+        , bio = ""
+        , image = "http://i.imgur.com/Qr71crq.jpg"
+        , following = False
+        }}
+
+articleAuthorInfo author =
+  div [ class "article-meta" ]
+      [ a [ href "profile.html" ]
+          [ img [ src "http://i.imgur.com/Qr71crq.jpg" ]
+              []
+          ]
+      , div [ class "info" ]
+          [ a [ class "author", href "" ]
+              [ text "Eric Simons" ]
+          , span [ class "date" ]
+              [ text "January 20th" ]
+          ]
+      , button [ class "btn btn-sm btn-outline-secondary" ]
+          [ i [ class "ion-plus-round" ]
+              []
+          , text "           Follow Eric Simons "
+          , span [ class "counter" ]
+              [ text "(10)" ]
+          ]
+      , text "         "
+      , button [ class "btn btn-sm btn-outline-primary" ]
+          [ i [ class "ion-heart" ]
+              []
+          , text "           Favorite Post "
+          , span [ class "counter" ]
+              [ text "(29)" ]
+          ]
+      ]
+
 
 article =
   div [ class "article-page" ]
     [ div [ class "banner" ]
         [ div [ class "container" ]
             [ h1 []
-                [ text "How to build webapps that scale" ]
-            , div [ class "article-meta" ]
-                [ a [ href "" ]
-                    [ img [ src "http://i.imgur.com/Qr71crq.jpg" ]
-                        []
-                    ]
-                , div [ class "info" ]
-                    [ a [ class "author", href "" ]
-                        [ text "Eric Simons" ]
-                    , span [ class "date" ]
-                        [ text "January 20th" ]
-                    ]
-                , button [ class "btn btn-sm btn-outline-secondary" ]
-                    [ i [ class "ion-plus-round" ]
-                        []
-                    , text "           Follow Eric Simons "
-                    , span [ class "counter" ]
-                        [ text "(10)" ]
-                    ]
-                , text "          "
-                , button [ class "btn btn-sm btn-outline-primary" ]
-                    [ i [ class "ion-heart" ]
-                        []
-                    , text "           Favorite Post "
-                    , span [ class "counter" ]
-                        [ text "(29)" ]
-                    ]
-                ]
+                [ text articleData.title ]
+            , articleAuthorInfo articleData.author
             ]
         ]
     , div [ class "container page" ]
@@ -52,33 +74,7 @@ article =
         , hr []
             []
         , div [ class "article-actions" ]
-            [ div [ class "article-meta" ]
-                [ a [ href "profile.html" ]
-                    [ img [ src "http://i.imgur.com/Qr71crq.jpg" ]
-                        []
-                    ]
-                , div [ class "info" ]
-                    [ a [ class "author", href "" ]
-                        [ text "Eric Simons" ]
-                    , span [ class "date" ]
-                        [ text "January 20th" ]
-                    ]
-                , button [ class "btn btn-sm btn-outline-secondary" ]
-                    [ i [ class "ion-plus-round" ]
-                        []
-                    , text "           Follow Eric Simons "
-                    , span [ class "counter" ]
-                        [ text "(10)" ]
-                    ]
-                , text "         "
-                , button [ class "btn btn-sm btn-outline-primary" ]
-                    [ i [ class "ion-heart" ]
-                        []
-                    , text "           Favorite Post "
-                    , span [ class "counter" ]
-                        [ text "(29)" ]
-                    ]
-                ]
+            [ articleAuthorInfo articleData.author
             ]
         , div [ class "row" ]
             [ div [ class "col-xs-12 col-md-8 offset-md-2" ]
