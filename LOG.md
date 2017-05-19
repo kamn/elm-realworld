@@ -93,7 +93,7 @@ I am having some issues with the footer css.
 I might look at the real app to see what they did.
 
 
-## May 18 2017 - 10:09 to 
+## May 18 2017 - 10:09 to 10:24
 Removed some code that was no longer needed in Views.Main.
 Looked at the example app(specifically footer).
 So... Apparently I cannot define the HTML for Elm.
@@ -102,3 +102,8 @@ Changed some of the artibutes but still getting the footer floating weird.
 
 https://gist.github.com/coreytrampe/a120fac4959db7852c0f.
 Maybe for external loading?
+
+## May 18 2017 - 10:26 to 10:41
+Just fixed a bunch of warnings.
+I actually caught some bugs with an article not following the data format it should.
+Seems like Elm automatically creates anon types.
