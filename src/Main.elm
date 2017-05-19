@@ -18,24 +18,22 @@ import Views.Editor exposing (editor)
 import Views.Article exposing (article)
 
 import Data.Article exposing (Articles)
+import Data.Msg exposing (Msg(..))
 
 -- ROUTING
 import Routes exposing (..)
 
 type alias Model = 
-  { route: Route
+  { route : Route
+  , mainPageData : Maybe Articles
   }
 
 model : Model
 model =
   { route = Home
+  , mainPageData = Nothing
   }
 
--- UPDATE
-
-type Msg 
-  = UrlChange Navigation.Location
-  | ArticleReq (Result Http.Error Articles)
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
@@ -47,7 +45,7 @@ update msg model =
       ({model | route = parseLocation loc}, Cmd.none)
     ArticleReq (Ok data) ->
       (log (toString data))
-      (model, Cmd.none)
+      ({model | mainPageData = Just data}, Cmd.none)
     ArticleReq (_) ->
       (log "failed")
       (log (toString msg))
@@ -57,7 +55,12 @@ view : Model -> Html Msg
 view model =
   case model.route of
     Home ->
-      layout home
+      case model.mainPageData of
+        Just articles ->
+          layout (home articles)
+        Nothing ->
+          -- TODO display an error?
+          layout (home {articles = []})
     Settings ->
       layout settings
     Login ->

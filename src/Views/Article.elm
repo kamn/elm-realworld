@@ -4,6 +4,8 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Data.Article exposing (..)
 
+
+
 articleData = 
     { slug = ""
     , title = "How to build webapps that scale"
