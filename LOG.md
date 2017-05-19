@@ -107,3 +107,10 @@ Maybe for external loading?
 Just fixed a bunch of warnings.
 I actually caught some bugs with an article not following the data format it should.
 Seems like Elm automatically creates anon types.
+
+## May 18 2017 - 10:41 to
+Back to fixing that stupid footer.
+I am just confused.
+It must be somehow related to how I am going the head stuff and got the html messed up.
+Also not super clear how to use custome html.
+There is soemthing about the elm-make and one issue about the elm-reactor but I feel like it should be supported.
