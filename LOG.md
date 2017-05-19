@@ -80,3 +80,14 @@ Continue work on decode.
 The example docs for elm-decode pipline need to have nullable imported.
 Got a basic decode of articles working! Alright!
 I think next I will work on displaying those articles correctly.
+
+## May 18 2017 - 9:38 to 9:53
+Starting working and from the test server and got a null description.
+Started to make templates 
+
+## May 18 2017 - 9:54 to 10:09
+Got the basic data from the example app and then iterated to display static data.
+Working on making it more dynamic.
+Got a lot of the data working.
+I am having some issues with the footer css.
+I might look at the real app to see what they did.
