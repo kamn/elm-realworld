@@ -7,12 +7,13 @@ import Json.Decode.Pipeline exposing (decode, required, optional, hardcoded)
 import Data.Article exposing (..)
 import Data.Profile exposing (..)
 
-
+baseUrl : String
 baseUrl = "https://conduit.productionready.io/api"
 
+articlesApi : String
 articlesApi = "/articles"
 
-
+decodeProfile : Decoder Profile
 decodeProfile =
   decode Profile
     |> required "username" string
@@ -20,6 +21,7 @@ decodeProfile =
     |> required "image" string
     |> required "following" bool
 
+decodeArticle : Decoder Article
 decodeArticle = 
   decode Article
     |> required "slug" string
@@ -34,7 +36,7 @@ decodeArticle =
     |> required "author" decodeProfile
 
 
-
+decodeArticles : Decoder Articles
 decodeArticles =
   decode Articles
     |> required "articles" (list decodeArticle)

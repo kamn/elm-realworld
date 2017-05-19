@@ -2,14 +2,17 @@ module Views.Article exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Data.Article exposing (..)
 
+import Data.Article exposing (Article)
+import Data.Profile exposing (Profile)
 
+import Data.Msg exposing (Msg)
 
+articleData : Article
 articleData = 
     { slug = ""
     , title = "How to build webapps that scale"
-    , description = ""
+    , description = Just ""
     , body = ""
     , tagList = []
     , createdAt = ""
@@ -18,11 +21,12 @@ articleData =
     , favoritesCount = 0
     , author = 
         { username = "Eric Simons"
-        , bio = ""
+        , bio = Just ""
         , image = "http://i.imgur.com/Qr71crq.jpg"
         , following = False
         }}
 
+articleAuthorInfo : Profile -> Html Msg
 articleAuthorInfo author =
   div [ class "article-meta" ]
       [ a [ href "profile.html" ]
@@ -52,7 +56,7 @@ articleAuthorInfo author =
           ]
       ]
 
-
+article : Html Msg
 article =
   div [ class "article-page" ]
     [ div [ class "banner" ]

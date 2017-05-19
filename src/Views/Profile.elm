@@ -3,6 +3,9 @@ module Views.Profile exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 
+import Data.Msg exposing (Msg)
+
+profile : Html Msg
 profile =
   div [ class "profile-page" ]
     [ div [ class "user-info" ]

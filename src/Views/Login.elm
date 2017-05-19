@@ -3,6 +3,9 @@ module Views.Login exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 
+import Data.Msg exposing (Msg)
+
+login : Html Msg
 login =
   div [ class "auth-page" ]
     [ div [ class "container page" ]

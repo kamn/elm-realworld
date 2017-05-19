@@ -3,6 +3,9 @@ module Views.Register exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 
+import Data.Msg exposing (Msg)
+
+register : Html Msg
 register =
   div [ class "auth-page" ]
     [ div [ class "container page" ]

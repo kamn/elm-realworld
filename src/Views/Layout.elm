@@ -3,6 +3,9 @@ module Views.Layout exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 
+import Data.Msg exposing (Msg)
+
+layout : Html Msg -> Html Msg
 layout container =
     div []
           [ node "head" []

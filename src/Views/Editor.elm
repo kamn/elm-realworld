@@ -3,7 +3,10 @@ module Views.Editor exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 
+import Data.Msg exposing (Msg)
+
 -- TODO -  For some reason the editor didn't work though html-to-elm
+editor : Html Msg
 editor =
   div [ class "editor-page" ]
     [ div [ class "container page" ]

@@ -3,6 +3,9 @@ module Views.Settings exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 
+import Data.Msg exposing (Msg)
+
+settings : Html Msg
 settings =
   div [ class "settings-page" ]
     [ div [ class "container page" ]

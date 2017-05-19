@@ -40,6 +40,7 @@ articlePreview article =
         ]
 
 
+home : Articles -> Html Msg
 home articles = 
   div [ class "home-page" ]
     [ div [ class "banner" ]

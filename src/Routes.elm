@@ -14,6 +14,7 @@ type Route
   | Article
   | NotFoundRoute
 
+route : Parser (Route -> c) c
 route =
   oneOf
     [ map Home top

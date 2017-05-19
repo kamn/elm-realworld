@@ -2,7 +2,6 @@ import Html exposing (Html, text, div, button)
 
 import Debug exposing (log)
 import Navigation exposing (Location)
-import UrlParser exposing (..)
 import Http
 
 import Request.General exposing (..)
@@ -76,11 +75,12 @@ view model =
     NotFoundRoute ->
       layout (div [] [text "NotFound"])
 
-
+init : Location -> (Model, Cmd Msg)
 init location =
   -- TODO Based on the location do different requests
   ({model | route = parseLocation location}, (Http.send ArticleReq getArticles))
 
+main : Program Never Model Msg
 main =
   Navigation.program UrlChange
   { init = init
