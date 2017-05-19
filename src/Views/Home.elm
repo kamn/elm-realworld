@@ -74,21 +74,24 @@ articlePreview article =
                 ]
             , div [ class "info" ]
                 [ a [ class "author", href "" ]
-                    [ text "Eric Simons" ]
+                    [ text article.author.username ]
                 , span [ class "date" ]
                     [ text "January 20th" ]
                 ]
             , button [ class "btn btn-outline-primary btn-sm pull-xs-right" ]
                 [ i [ class "ion-heart" ]
                     []
-                , text "29            "
+                , text (" " ++ (toString article.favoritesCount))
                 ]
             ]
         , a [ class "preview-link", href "" ]
             [ h1 []
-                [ text "How to build webapps that scale" ]
+                [ text article.title ]
             , p []
-                [ text "This is the description for the post." ]
+                [ text 
+                    (case article.description of
+                        Just s -> s
+                        Nothing -> "") ]
             , span []
                 [ text "Read more..." ]
             ]
@@ -121,9 +124,6 @@ home articles =
                         ]
                     ]
                 , (List.map articlePreview articles.articles) |> div []
-                , articlePreview1
-                , articlePreview2
-
                 ]
             , div [ class "col-md-3" ]
                 [ div [ class "sidebar" ]
