@@ -24,7 +24,7 @@ decodeArticle =
   decode Article
     |> required "slug" string
     |> required "title" string
-    |> required "description" string
+    |> required "description" (nullable string)
     |> required "body" string
     |> required "tagList" (list string)
     |> required "createdAt" string

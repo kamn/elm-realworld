@@ -9,7 +9,7 @@ type alias Articles =
 type alias Article = 
  { slug : String
  , title : String
- , description : String
+ , description : Maybe String
  , body : String
  , tagList : List String
  , createdAt : String -- TODO - Use a Date library
