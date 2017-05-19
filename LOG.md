@@ -91,3 +91,14 @@ Working on making it more dynamic.
 Got a lot of the data working.
 I am having some issues with the footer css.
 I might look at the real app to see what they did.
+
+
+## May 18 2017 - 10:09 to 
+Removed some code that was no longer needed in Views.Main.
+Looked at the example app(specifically footer).
+So... Apparently I cannot define the HTML for Elm.
+That gets defined already...
+Changed some of the artibutes but still getting the footer floating weird.
+
+https://gist.github.com/coreytrampe/a120fac4959db7852c0f.
+Maybe for external loading?

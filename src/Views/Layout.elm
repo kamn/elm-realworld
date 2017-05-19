@@ -4,7 +4,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 
 layout container =
-    node "html" []
+    div []
           [ node "head" []
               [ node "meta" [ charset "utf-8" ]
                   []
@@ -17,7 +17,7 @@ layout container =
               , node "link" [ href "//demo.productionready.io/main.css", rel "stylesheet" ]
                   []
               ]
-          , body []
+          , div [class "page-frame"]
                 -- TODO - Highlight different components depending on where they are routing
               [ nav [ class "navbar navbar-light" ]
                   [ div [ class "container" ]
