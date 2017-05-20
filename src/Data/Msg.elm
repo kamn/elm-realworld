@@ -11,3 +11,4 @@ type Msg
   = UrlChange Navigation.Location
   | HomeReq (Result Http.Error Articles)
   | ArticleReq (Result Http.Error ArticleContainer)
+  | TagsReq (Result Http.Error TagsContainer)

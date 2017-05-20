@@ -6,6 +6,10 @@ type alias Articles =
   { articles: List Article
   }
 
+
+type alias TagsContainer = 
+  {tags: List String}
+
 type alias ArticleContainer =
  { article: Article }
 

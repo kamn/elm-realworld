@@ -26,6 +26,7 @@ type alias Model =
   { route : Route
   , mainPageData : Maybe Articles
   , articleData : Maybe Article
+  , tags : List String
   }
 
 model : Model
@@ -33,6 +34,7 @@ model =
   { route = Home
   , mainPageData = Nothing
   , articleData = Nothing
+  , tags = []
   }
 
 
@@ -59,6 +61,10 @@ update msg model =
     ArticleReq (_) ->
       (log "failed")
       (log (toString msg))
+      (model, Cmd.none)
+    TagsReq (Ok data) ->
+      ({model | tags = data.tags}, Cmd.none)
+    TagsReq (_) ->
       (model, Cmd.none)
 
 view : Model -> Html Msg
@@ -98,7 +104,10 @@ init location =
   in
     case newRoute of
       Home ->
-        ({model | route = newRoute}, (Http.send HomeReq getArticles))
+        ({model | route = newRoute}, 
+         Cmd.batch 
+          [ (Http.send HomeReq getArticles)
+          , (Http.send TagsReq getTags)])
       Routes.Article s ->
         ({model | route = newRoute}, (Http.send ArticleReq (getArticle s)))
       _ ->

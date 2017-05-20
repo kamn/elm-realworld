@@ -13,6 +13,8 @@ baseUrl = "https://conduit.productionready.io/api"
 articlesApi : String
 articlesApi = "/articles"
 
+tagsApi : String
+tagsApi = "/tags"
 
 decodeProfile : Decoder Profile
 decodeProfile =
@@ -46,6 +48,14 @@ decodeArticles =
   decode Articles
     |> required "articles" (list decodeArticle)
 
+decodeTagContainer : Decoder TagsContainer
+decodeTagContainer =
+  decode TagsContainer
+    |> required "tags" (list string)
+
+getTags : Http.Request TagsContainer
+getTags =
+  Http.get (baseUrl ++ tagsApi) decodeTagContainer
 
 getArticle : String -> Http.Request ArticleContainer
 getArticle slug =
