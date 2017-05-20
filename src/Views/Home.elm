@@ -6,6 +6,10 @@ import Html.Attributes exposing (..)
 import Data.Article exposing (..)
 import Data.Msg exposing (Msg)
 
+import Date.Format exposing (format)
+
+import Date exposing (fromString)
+
 articlePreview : Article -> Html Msg
 articlePreview article =
     div [ class "article-preview" ]
@@ -18,8 +22,11 @@ articlePreview article =
                 [ a [ class "author", href "" ]
                     [ text article.author.username ]
                 , span [ class "date" ]
-                    [ text article.updatedAt ] -- TODO: Convert to a actual time stamp of format "january 20th"
-                    -- TODO: updatedAt or createdAt?
+                    [ text 
+                        (case (fromString article.updatedAt) of
+                            Err _ -> "..." -- What to really do here? 
+                            Ok d -> 
+                                format "%B %e, %Y" d) ]
                 ]
             , button [ class "btn btn-outline-primary btn-sm pull-xs-right" ]
                 [ i [ class "ion-heart" ]
