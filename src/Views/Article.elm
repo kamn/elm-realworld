@@ -8,41 +8,23 @@ import Data.Profile exposing (Profile)
 
 import Data.Msg exposing (Msg)
 
-articleData : Article
-articleData = 
-    { slug = ""
-    , title = "How to build webapps that scale"
-    , description = Just ""
-    , body = ""
-    , tagList = []
-    , createdAt = ""
-    , updatedAt = ""
-    , favorited = False
-    , favoritesCount = 0
-    , author = 
-        { username = "Eric Simons"
-        , bio = Just ""
-        , image = "http://i.imgur.com/Qr71crq.jpg"
-        , following = False
-        }}
-
 articleAuthorInfo : Profile -> Html Msg
 articleAuthorInfo author =
   div [ class "article-meta" ]
       [ a [ href "profile.html" ]
-          [ img [ src "http://i.imgur.com/Qr71crq.jpg" ]
+          [ img [ src author.image ]
               []
           ]
       , div [ class "info" ]
           [ a [ class "author", href "" ]
-              [ text "Eric Simons" ]
+              [ text author.username ]
           , span [ class "date" ]
               [ text "January 20th" ]
           ]
       , button [ class "btn btn-sm btn-outline-secondary" ]
           [ i [ class "ion-plus-round" ]
               []
-          , text "           Follow Eric Simons "
+          , text (" Follow " ++ author.username ++ " ")
           , span [ class "counter" ]
               [ text "(10)" ]
           ]
@@ -56,14 +38,14 @@ articleAuthorInfo author =
           ]
       ]
 
-article : Html Msg
-article =
+article : Article -> Html Msg
+article art =
   div [ class "article-page" ]
     [ div [ class "banner" ]
         [ div [ class "container" ]
             [ h1 []
-                [ text articleData.title ]
-            , articleAuthorInfo articleData.author
+                [ text art.title ]
+            , articleAuthorInfo art.author
             ]
         ]
     , div [ class "container page" ]
@@ -80,7 +62,7 @@ article =
         , hr []
             []
         , div [ class "article-actions" ]
-            [ articleAuthorInfo articleData.author
+            [ articleAuthorInfo art.author
             ]
         , div [ class "row" ]
             [ div [ class "col-xs-12 col-md-8 offset-md-2" ]

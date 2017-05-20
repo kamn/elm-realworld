@@ -36,6 +36,10 @@ decodeArticle =
     |> required "favoritesCount" int
     |> required "author" decodeProfile
 
+decodeArticleContainer : Decoder ArticleContainer
+decodeArticleContainer =
+  decode ArticleContainer
+    |> required "article" decodeArticle
 
 decodeArticles : Decoder Articles
 decodeArticles =
@@ -43,9 +47,9 @@ decodeArticles =
     |> required "articles" (list decodeArticle)
 
 
-getArticle : String -> Http.Request Article
+getArticle : String -> Http.Request ArticleContainer
 getArticle slug =
-  Http.get (baseUrl ++ articlesApi ++ "/" ++ slug) decodeArticle
+  Http.get (baseUrl ++ articlesApi ++ "/" ++ slug) decodeArticleContainer
 
 
 getArticles : Http.Request Articles

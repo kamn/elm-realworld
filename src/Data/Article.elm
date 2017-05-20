@@ -6,6 +6,9 @@ type alias Articles =
   { articles: List Article
   }
 
+type alias ArticleContainer =
+ { article: Article }
+
 type alias Article = 
  { slug : String
  , title : String

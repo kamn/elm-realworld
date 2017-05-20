@@ -16,7 +16,7 @@ import Views.Profile exposing (profile)
 import Views.Editor exposing (editor)
 import Views.Article exposing (article)
 
-import Data.Article exposing (Articles)
+import Data.Article exposing (Articles, Article)
 import Data.Msg exposing (Msg(..))
 
 -- ROUTING
@@ -25,12 +25,14 @@ import Routes exposing (..)
 type alias Model = 
   { route : Route
   , mainPageData : Maybe Articles
+  , articleData : Maybe Article
   }
 
 model : Model
 model =
   { route = Home
   , mainPageData = Nothing
+  , articleData = Nothing
   }
 
 
@@ -38,18 +40,25 @@ update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
     UrlChange loc ->
-      log loc.pathname
-      log loc.hash
-      log loc.href
-      ({model | route = parseLocation loc}, Cmd.none)
+      case (parseLocation loc) of
+        Routes.Article s ->
+          ({model | route = parseLocation loc}, (Http.send ArticleReq (getArticle s)))
+        _ ->
+          ({model | route = parseLocation loc}, Cmd.none)
     HomeReq (Ok data) ->
-      (log (toString data))
       ({model | mainPageData = Just data}, Cmd.none)
     HomeReq (_) ->
       (log "failed")
       (log (toString msg))
       (model, Cmd.none)
-    _ ->
+    ArticleReq (Ok data) ->
+      (log "-----------")
+      (log (toString data))
+      (log "-----------")
+      ({model | articleData = Just data.article}, Cmd.none)
+    ArticleReq (_) ->
+      (log "failed")
+      (log (toString msg))
       (model, Cmd.none)
 
 view : Model -> Html Msg
@@ -73,9 +82,12 @@ view model =
     Editor ->
       layout editor
     Routes.Article s ->
-      (log "Article Slug")
-      (log s)
-      layout article
+      case model.articleData of
+        Just a ->
+          layout (article a)
+        Nothing ->
+          -- TODO display an error?
+          layout (home {articles = []})
     NotFoundRoute ->
       layout (div [] [text "NotFound"])
 
