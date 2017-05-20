@@ -8,6 +8,8 @@ import Data.Profile exposing (Profile)
 
 import Data.Msg exposing (Msg)
 
+import Markdown as Markdown
+
 articleAuthorInfo : Profile -> Html Msg
 articleAuthorInfo author =
   div [ class "article-meta" ]
@@ -49,7 +51,9 @@ article art =
             ]
         ]
     , div [ class "container page" ]
-        [ div [ class "row article-content" ]
+        [ 
+            Markdown.toHtml [class "row article-content"] art.body
+            {-div [ class "row article-content" ]
             [div [] [text art.body]]
             {-[ div [ class "col-md-12" ]
                 [ p []
@@ -59,7 +63,7 @@ article art =
                 , p []
                     [ text "It's a great solution for learning how other frameworks work." ]
                 ]
-            ]-}
+            ]-}-}
         , hr []
             []
         , div [ class "article-actions" ]
