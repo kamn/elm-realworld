@@ -146,3 +146,25 @@ http://rtfeldman.github.io/elm-spa-example/
 The description for an article is only for the short article view.
 Looking into using elm-markdown... Not sure about classes.
 
+## May 19 2017 - 10:45 to 11:00
+Added elm-markdown.
+It seems to be right compared to the demo app but I wonder if it works in all cases.
+There are specific classes that are in the demo examples.
+
+Look into elm-time for the time handleing.
+
+## May 19 2017 - 11:00 to 11:15
+Got a bit into time handeling libraries but elm does everything it turns out!
+Just need to format.
+The format does not seem to have a "th" or "st" part.
+I should request that.
+
+## May 19 2017 - 11:15 to 11:30
+Looking at other apps they do it slightly differently.
+Which is all different from the template.
+
+Doing some research into how to batch calls to the server for some things.
+http://stackoverflow.com/questions/39392469/how-to-perform-multiple-http-requests-tasks-in-bulk-in-elm-lang
+Seems like the solution.
+
+Fixed issue with first loading an article.
