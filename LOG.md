@@ -134,3 +134,15 @@ Also changed the Readme a little.
 ## May 19 2017 - 9:57 to 10:12
 Display the raw timestamp.
 Started to work on loading an article from the api.
+
+## May 19 2017 - 10:13 to 10:28
+Continued work on getting data from the api for an article
+
+## May 19 2017 - 10:28 to 10:43
+Got an article basically loading.
+There are some bugs still but there is at least something there.
+Looked at my demo reference...
+http://rtfeldman.github.io/elm-spa-example/
+The description for an article is only for the short article view.
+Looking into using elm-markdown... Not sure about classes.
+
