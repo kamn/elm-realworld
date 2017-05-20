@@ -9,4 +9,5 @@ import Data.Article exposing (..)
 
 type Msg 
   = UrlChange Navigation.Location
-  | ArticleReq (Result Http.Error Articles)
+  | HomeReq (Result Http.Error Articles)
+  | Article (Result Http.Error Article)

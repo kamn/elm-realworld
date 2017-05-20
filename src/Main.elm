@@ -42,12 +42,14 @@ update msg model =
       log loc.hash
       log loc.href
       ({model | route = parseLocation loc}, Cmd.none)
-    ArticleReq (Ok data) ->
+    HomeReq (Ok data) ->
       (log (toString data))
       ({model | mainPageData = Just data}, Cmd.none)
-    ArticleReq (_) ->
+    HomeReq (_) ->
       (log "failed")
       (log (toString msg))
+      (model, Cmd.none)
+    _ ->
       (model, Cmd.none)
 
 view : Model -> Html Msg
@@ -70,7 +72,9 @@ view model =
       layout profile
     Editor ->
       layout editor
-    Article ->
+    Routes.Article s ->
+      (log "Article Slug")
+      (log s)
       layout article
     NotFoundRoute ->
       layout (div [] [text "NotFound"])
@@ -78,7 +82,7 @@ view model =
 init : Location -> (Model, Cmd Msg)
 init location =
   -- TODO Based on the location do different requests
-  ({model | route = parseLocation location}, (Http.send ArticleReq getArticles))
+  ({model | route = parseLocation location}, (Http.send HomeReq getArticles))
 
 main : Program Never Model Msg
 main =

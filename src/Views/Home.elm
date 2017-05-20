@@ -27,7 +27,7 @@ articlePreview article =
                 , text (" " ++ (toString article.favoritesCount))
                 ]
             ]
-        , a [ class "preview-link", href "" ]
+        , a [ class "preview-link", href ("#/article/" ++ article.slug) ]
             [ h1 []
                 [ text article.title ]
             , p []

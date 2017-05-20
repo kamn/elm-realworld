@@ -11,7 +11,7 @@ type Route
   | Register
   | Profile
   | Editor
-  | Article
+  | Article String
   | NotFoundRoute
 
 route : Parser (Route -> c) c
@@ -23,7 +23,7 @@ route =
     , map Register (s "register")
     , map Profile (s "profile")
     , map Editor (s "editor")
-    , map Article (s "article")
+    , map Article (s "article" </> UrlParser.string)
     ]
 
 
