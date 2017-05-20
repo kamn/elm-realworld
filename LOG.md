@@ -130,3 +130,7 @@ This is the issue!
 Fixed it in a hacky way.
 I will have to refactor and figure out how to use an external html page.
 Also changed the Readme a little.
+
+## May 19 2017 - 9:57 to 10:12
+Display the raw timestamp.
+Started to work on loading an article from the api.
