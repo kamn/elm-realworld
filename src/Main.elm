@@ -73,10 +73,10 @@ view model =
     Home ->
       case model.mainPageData of
         Just articles ->
-          layout (home articles)
+          layout (home articles model.tags)
         Nothing ->
           -- TODO display an error?
-          layout (home {articles = []})
+          layout (home {articles = []} [])
     Settings ->
       layout settings
     Login ->
@@ -93,7 +93,7 @@ view model =
           layout (article a)
         Nothing ->
           -- TODO display an error?
-          layout (home {articles = []})
+          layout (home {articles = []} [])
     NotFoundRoute ->
       layout (div [] [text "NotFound"])
 

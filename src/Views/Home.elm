@@ -48,8 +48,8 @@ articlePreview article =
         ]
 
 
-home : Articles -> Html Msg
-home articles = 
+home : Articles -> List String -> Html Msg
+home articles tags = 
   div [ class "home-page" ]
     [ div [ class "banner" ]
         [ div [ class "container" ]
@@ -81,23 +81,10 @@ home articles =
                     [ p []
                         [ text "Popular Tags" ]
                     , div [ class "tag-list" ]
-                        [ a [ class "tag-pill tag-default", href "" ]
-                            [ text "programming" ]
-                        , a [ class "tag-pill tag-default", href "" ]
-                            [ text "javascript" ]
-                        , a [ class "tag-pill tag-default", href "" ]
-                            [ text "emberjs" ]
-                        , a [ class "tag-pill tag-default", href "" ]
-                            [ text "angularjs" ]
-                        , a [ class "tag-pill tag-default", href "" ]
-                            [ text "react" ]
-                        , a [ class "tag-pill tag-default", href "" ]
-                            [ text "mean" ]
-                        , a [ class "tag-pill tag-default", href "" ]
-                            [ text "node" ]
-                        , a [ class "tag-pill tag-default", href "" ]
-                            [ text "rails" ]
-                        ]
+                        (List.map 
+                            (\tag -> 
+                                a [ class "tag-pill tag-default", href "" ]
+                                  [ text tag ]) tags)
                     ]
                 ]
             ]
