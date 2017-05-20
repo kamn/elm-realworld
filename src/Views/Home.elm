@@ -18,7 +18,8 @@ articlePreview article =
                 [ a [ class "author", href "" ]
                     [ text article.author.username ]
                 , span [ class "date" ]
-                    [ text "January 20th" ]
+                    [ text article.updatedAt ] -- TODO: Convert to a actual time stamp of format "january 20th"
+                    -- TODO: updatedAt or createdAt?
                 ]
             , button [ class "btn btn-outline-primary btn-sm pull-xs-right" ]
                 [ i [ class "ion-heart" ]
