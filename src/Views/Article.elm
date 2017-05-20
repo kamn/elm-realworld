@@ -50,7 +50,8 @@ article art =
         ]
     , div [ class "container page" ]
         [ div [ class "row article-content" ]
-            [ div [ class "col-md-12" ]
+            [div [] [text art.body]]
+            {-[ div [ class "col-md-12" ]
                 [ p []
                     [ text "Web development technologies have evolved at an incredible clip over the past few years.        " ]
                 , h2 [ id "introducing-ionic" ]
@@ -58,7 +59,7 @@ article art =
                 , p []
                     [ text "It's a great solution for learning how other frameworks work." ]
                 ]
-            ]
+            ]-}
         , hr []
             []
         , div [ class "article-actions" ]
