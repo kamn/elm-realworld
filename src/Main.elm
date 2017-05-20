@@ -93,8 +93,16 @@ view model =
 
 init : Location -> (Model, Cmd Msg)
 init location =
-  -- TODO Based on the location do different requests
-  ({model | route = parseLocation location}, (Http.send HomeReq getArticles))
+  let 
+    newRoute = parseLocation location
+  in
+    case newRoute of
+      Home ->
+        ({model | route = newRoute}, (Http.send HomeReq getArticles))
+      Routes.Article s ->
+        ({model | route = newRoute}, (Http.send ArticleReq (getArticle s)))
+      _ ->
+        ({model | route = newRoute}, (Http.send HomeReq getArticles))
 
 main : Program Never Model Msg
 main =
