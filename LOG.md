@@ -168,3 +168,17 @@ http://stackoverflow.com/questions/39392469/how-to-perform-multiple-http-request
 Seems like the solution.
 
 Fixed issue with first loading an article.
+
+## May 20 2017 - 12:13 to 12:28
+Going to try to get tags on the main page.
+Got them loading in from the server.
+
+## May 20 2017 - 12:29 to 12:42
+Got tags displayig.
+Have to cut the session short.
+
+## May 20 2017 - 9:20 to 9:35
+Going to take some time to refactor and reorganize the code.
+Centralized the loading code for different locations.
+Hide "Your Feed" if your are not logged in
+
