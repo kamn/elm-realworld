@@ -4,9 +4,10 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 
 import Data.Msg exposing (Msg)
+import Data.Profile exposing (Profile)
 
-profile : Html Msg
-profile =
+profile : Profile -> Html Msg
+profile pro =
   div [ class "profile-page" ]
     [ div [ class "user-info" ]
         [ div [ class "container" ]
@@ -15,7 +16,7 @@ profile =
                     [ img [ class "user-img", src "http://i.imgur.com/Qr71crq.jpg" ]
                         []
                     , h4 []
-                        [ text "Eric Simons" ]
+                        [ text (pro.username) ]
                     , p []
                         [ text "Cofounder @GoThinkster, lived in Aol's HQ for a few months, kinda looks like Peeta from the Hunger Games          " ]
                     , button [ class "btn btn-sm btn-outline-secondary action-btn" ]

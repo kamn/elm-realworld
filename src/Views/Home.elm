@@ -20,7 +20,7 @@ articlePreview article =
                     []
                 ]
             , div [ class "info" ]
-                [ a [ class "author", href "" ]
+                [ a [ class "author", href ("#/profile/" ++ article.author.username) ]
                     [ text article.author.username ]
                 , span [ class "date" ]
                     [ text 

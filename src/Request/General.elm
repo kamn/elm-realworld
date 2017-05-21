@@ -16,6 +16,9 @@ articlesApi = "/articles"
 tagsApi : String
 tagsApi = "/tags"
 
+profileApi : String
+profileApi = "/profiles"
+
 decodeProfile : Decoder Profile
 decodeProfile =
   decode Profile
@@ -23,6 +26,11 @@ decodeProfile =
     |> required "bio" (nullable string)
     |> required "image" string
     |> required "following" bool
+
+decodeProfileContainer : Decoder ProfileContainer
+decodeProfileContainer =
+  decode ProfileContainer
+    |> required "profile" decodeProfile
 
 decodeArticle : Decoder Article
 decodeArticle = 
@@ -61,7 +69,10 @@ getArticle : String -> Http.Request ArticleContainer
 getArticle slug =
   Http.get (baseUrl ++ articlesApi ++ "/" ++ slug) decodeArticleContainer
 
-
 getArticles : Http.Request Articles
 getArticles =
   Http.get (baseUrl ++ articlesApi) decodeArticles
+
+getProfile : String -> Http.Request ProfileContainer
+getProfile username =
+  Http.get (baseUrl ++ profileApi ++ "/" ++ username) decodeProfileContainer

@@ -18,6 +18,7 @@ import Views.Article exposing (article)
 
 import Data.Article exposing (Articles, Article)
 import Data.User exposing (User)
+import Data.Profile exposing (Profile)
 
 import Data.Msg exposing (Msg(..))
 
@@ -30,6 +31,7 @@ type alias Model =
   , articleData : Maybe Article
   , tags : List String
   , user : Maybe User
+  , profile : Maybe Profile
   }
 
 model : Model
@@ -39,6 +41,7 @@ model =
   , articleData = Nothing
   , tags = []
   , user = Nothing
+  , profile = Nothing
   }
 
 
@@ -52,6 +55,8 @@ parseUrlChange model newRoute =
           , (Http.send TagsReq getTags)])
       Routes.Article s ->
         ({model | route = newRoute}, (Http.send ArticleReq (getArticle s)))
+      Profile s ->
+        ({model | route = newRoute}, (Http.send ProfileReq (getProfile s)))
       _ ->
         ({model | route = newRoute}, (Http.send HomeReq getArticles))
 
@@ -80,6 +85,13 @@ update msg model =
       ({model | tags = data.tags}, Cmd.none)
     TagsReq (_) ->
       (model, Cmd.none)
+    ProfileReq (Ok data) ->
+      (log "-----------")
+      (log (toString data))
+      (log "-----------")
+      ({model | profile = Just data.profile}, Cmd.none)
+    ProfileReq (_) ->
+      (model, Cmd.none)
 
 view : Model -> Html Msg
 view model =
@@ -97,8 +109,13 @@ view model =
       layout model.route login
     Register ->
       layout model.route register
-    Profile ->
-      layout model.route profile
+    Profile s ->
+      case model.profile of
+        Just pro ->
+          layout model.route (profile pro)
+        Nothing ->
+          -- TODO Should be something else
+          layout model.route (div [] [text "NotFound"])
     Editor ->
       layout model.route editor
     Routes.Article s ->

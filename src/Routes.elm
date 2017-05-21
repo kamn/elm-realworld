@@ -9,7 +9,7 @@ type Route
   | Settings
   | Login
   | Register
-  | Profile
+  | Profile String
   | Editor
   | Article String
   | NotFoundRoute
@@ -21,7 +21,7 @@ route =
     , map Settings (s "settings")
     , map Login (s "login")
     , map Register (s "register")
-    , map Profile (s "profile")
+    , map Profile (s "profile"  </> UrlParser.string)
     , map Editor (s "editor")
     , map Article (s "article" </> UrlParser.string)
     ]
