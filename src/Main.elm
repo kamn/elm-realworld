@@ -38,15 +38,25 @@ model =
   }
 
 
+parseUrlChange : Model -> Route -> (Model, Cmd Msg)
+parseUrlChange model newRoute =
+  case newRoute of
+      Home ->
+        ({model | route = newRoute}, 
+         Cmd.batch 
+          [ (Http.send HomeReq getArticles)
+          , (Http.send TagsReq getTags)])
+      Routes.Article s ->
+        ({model | route = newRoute}, (Http.send ArticleReq (getArticle s)))
+      _ ->
+        ({model | route = newRoute}, (Http.send HomeReq getArticles))
+
+
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
     UrlChange loc ->
-      case (parseLocation loc) of
-        Routes.Article s ->
-          ({model | route = parseLocation loc}, (Http.send ArticleReq (getArticle s)))
-        _ ->
-          ({model | route = parseLocation loc}, Cmd.none)
+      parseUrlChange model (parseLocation loc)
     HomeReq (Ok data) ->
       ({model | mainPageData = Just data}, Cmd.none)
     HomeReq (_) ->
@@ -102,16 +112,7 @@ init location =
   let 
     newRoute = parseLocation location
   in
-    case newRoute of
-      Home ->
-        ({model | route = newRoute}, 
-         Cmd.batch 
-          [ (Http.send HomeReq getArticles)
-          , (Http.send TagsReq getTags)])
-      Routes.Article s ->
-        ({model | route = newRoute}, (Http.send ArticleReq (getArticle s)))
-      _ ->
-        ({model | route = newRoute}, (Http.send HomeReq getArticles))
+    parseUrlChange model newRoute
 
 main : Program Never Model Msg
 main =
