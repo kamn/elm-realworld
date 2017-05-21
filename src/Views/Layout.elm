@@ -4,6 +4,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 
 import Data.Msg exposing (Msg)
+import Routes exposing (Route(..))
 
 stylesheet : String -> Html Msg
 stylesheet url =
@@ -19,10 +20,37 @@ stylesheet url =
     in 
         node tag attrs children
 
+type NavbarLinks
+    = Home
+    | NewPost
+    | Settings
+    | SignUp
+
+getLinkClasses : NavbarLinks -> Route -> String
+getLinkClasses navLinks route =
+    case route of
+        Routes.Home ->
+            case navLinks of
+                Home -> "nav-link active"
+                _ -> "nav-link"
+        Routes.Editor ->
+            case navLinks of
+                NewPost -> "nav-link active"
+                _ -> "nav-link"
+        Routes.Settings ->
+            case navLinks of
+                Settings -> "nav-link active"
+                _ -> "nav-link"
+        Routes.Register ->
+            case navLinks of
+                SignUp -> "nav-link active"
+                _ -> "nav-link"
+        _ -> "nav-link"
+
 -- TODO Figure out how to do this outside of elm
 -- node "title" [] [ text "Conduit" ]
-layout : Html Msg -> Html Msg
-layout container =
+layout : Route -> Html Msg -> Html Msg
+layout route container =
     div [class "page-frame"]
           [ stylesheet "//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"
           , stylesheet "//fonts.googleapis.com/css?family=Titillium+Web:700|Source+Serif+Pro:400,700|Merriweather+Sans:400,700|Source+Sans+Pro:400,300,600,700,300italic,400italic,600italic,700italic"
@@ -35,25 +63,25 @@ layout container =
                         [ text "conduit" ]
                     , ul [ class "nav navbar-nav pull-xs-right" ]
                         [ li [ class "nav-item" ]
-                            [ a [ class "nav-link active", href "#/" ]
+                            [ a [ class (getLinkClasses Home route), href "#/" ]
                                 [ text "Home" ]
                             ]
                         , li [ class "nav-item" ]
-                            [ a [ class "nav-link", href "#/editor" ]
+                            [ a [ class (getLinkClasses NewPost route), href "#/editor" ]
                                 [ i [ class "ion-compose" ]
                                     []
                                 , text " New Post            "
                                 ]
                             ]
                         , li [ class "nav-item" ]
-                            [ a [ class "nav-link", href "#/settings" ]
+                            [ a [ class (getLinkClasses Settings route), href "#/settings" ]
                                 [ i [ class "ion-gear-a" ]
                                     []
                                 , text " Settings            "
                                 ]
                             ]
                         , li [ class "nav-item" ]
-                            [ a [ class "nav-link", href "#/register" ]
+                            [ a [ class (getLinkClasses SignUp route), href "#/register" ]
                                 [ text "Sign up" ]
                             ]
                         ]

@@ -87,29 +87,29 @@ view model =
     Home ->
       case model.mainPageData of
         Just articles ->
-          layout (home model.user articles model.tags)
+          layout model.route (home model.user articles model.tags)
         Nothing ->
           -- TODO display an error?
-          layout (home model.user {articles = []} [])
+          layout model.route (home model.user {articles = []} [])
     Settings ->
-      layout settings
+      layout model.route settings
     Login ->
-      layout login
+      layout model.route login
     Register ->
-      layout register
+      layout model.route register
     Profile ->
-      layout profile
+      layout model.route profile
     Editor ->
-      layout editor
+      layout model.route editor
     Routes.Article s ->
       case model.articleData of
         Just a ->
-          layout (article a)
+          layout model.route (article a)
         Nothing ->
           -- TODO display an error?
-          layout (home model.user {articles = []} [])
+          layout model.route (home model.user {articles = []} [])
     NotFoundRoute ->
-      layout (div [] [text "NotFound"])
+      layout model.route (div [] [text "NotFound"])
 
 init : Location -> (Model, Cmd Msg)
 init location =
