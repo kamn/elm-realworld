@@ -5,6 +5,7 @@ import Html.Attributes exposing (..)
 
 import Data.Article exposing (..)
 import Data.Msg exposing (Msg)
+import Data.User exposing (User)
 
 import Date.Format exposing (format)
 
@@ -48,8 +49,8 @@ articlePreview article =
         ]
 
 
-home : Articles -> List String -> Html Msg
-home articles tags = 
+home : Maybe User -> Articles -> List String -> Html Msg
+home user articles tags = 
   div [ class "home-page" ]
     [ div [ class "banner" ]
         [ div [ class "container" ]
@@ -64,7 +65,14 @@ home articles tags =
             [ div [ class "col-md-9" ]
                 [ div [ class "feed-toggle" ]
                     [ ul [ class "nav nav-pills outline-active" ]
-                        [ li [ class "nav-item" ]
+                        [ li 
+                            [ class "nav-item"
+                            , style
+                                (case user of
+                                    Just m ->
+                                        [] 
+                                    Nothing ->
+                                        [("display","none")])]
                             [ a [ class "nav-link disabled", href "" ]
                                 [ text "Your Feed" ]
                             ]

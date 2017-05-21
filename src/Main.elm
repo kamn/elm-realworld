@@ -17,6 +17,8 @@ import Views.Editor exposing (editor)
 import Views.Article exposing (article)
 
 import Data.Article exposing (Articles, Article)
+import Data.User exposing (User)
+
 import Data.Msg exposing (Msg(..))
 
 -- ROUTING
@@ -27,6 +29,7 @@ type alias Model =
   , mainPageData : Maybe Articles
   , articleData : Maybe Article
   , tags : List String
+  , user : Maybe User
   }
 
 model : Model
@@ -35,6 +38,7 @@ model =
   , mainPageData = Nothing
   , articleData = Nothing
   , tags = []
+  , user = Nothing
   }
 
 
@@ -83,10 +87,10 @@ view model =
     Home ->
       case model.mainPageData of
         Just articles ->
-          layout (home articles model.tags)
+          layout (home model.user articles model.tags)
         Nothing ->
           -- TODO display an error?
-          layout (home {articles = []} [])
+          layout (home model.user {articles = []} [])
     Settings ->
       layout settings
     Login ->
@@ -103,7 +107,7 @@ view model =
           layout (article a)
         Nothing ->
           -- TODO display an error?
-          layout (home {articles = []} [])
+          layout (home model.user {articles = []} [])
     NotFoundRoute ->
       layout (div [] [text "NotFound"])
 
