@@ -182,3 +182,12 @@ Going to take some time to refactor and reorganize the code.
 Centralized the loading code for different locations.
 Hide "Your Feed" if your are not logged in
 
+## May 20 2017 - 9:35 to 9:50
+Working on highlighting different parts of the app in the nav bar.
+Maybe a little more complex than it needed to be but it is working.
+
+## May 20 2017 - 9:50 to 10:05
+Going to try to get profiles loading.
+Got them loading and got it setup to get the data for the profile.
+I will need to fillout the rest of the profile page with data.
+I will also have to load the articles written and liked by the user.
