@@ -32,7 +32,7 @@ type alias Model =
   , tags : List String
   , user : Maybe User
   , profile : Maybe Profile
-  , profileArticles : Maybe Articles
+  , profileArticles : List Article
   }
 
 model : Model
@@ -43,7 +43,7 @@ model =
   , tags = []
   , user = Nothing
   , profile = Nothing
-  , profileArticles = Nothing
+  , profileArticles = []
   }
 
 
@@ -99,9 +99,9 @@ update msg model =
       (model, Cmd.none)
     ProfileArticlesReq(Ok data) ->
       (log "-----------")
-      (log (toString data))
+      (log (toString data.articles))
       (log "-----------")
-      ({model | profileArticles = Just data}, Cmd.none)
+      ({model | profileArticles = data.articles}, Cmd.none)
     ProfileArticlesReq(_) ->
       (model, Cmd.none)
 
@@ -124,7 +124,7 @@ view model =
     Profile s ->
       case model.profile of
         Just pro ->
-          layout model.route (profile pro)
+          layout model.route (profile pro model.profileArticles)
         Nothing ->
           -- TODO Should be something else
           layout model.route (div [] [text "NotFound"])

@@ -8,7 +8,48 @@ import Data.Profile exposing (Profile)
 
 import Data.Msg exposing (Msg)
 
+import Date.Format exposing (format)
+import Date exposing (fromString)
+
 import Markdown as Markdown
+
+articlePreview : Article -> Html Msg
+articlePreview article =
+    div [ class "article-preview" ]
+        [ div [ class "article-meta" ]
+            [ a [ href "profile.html" ]
+                [ img [ src article.author.image ]
+                    []
+                ]
+            , div [ class "info" ]
+                [ a [ class "author", href ("#/profile/" ++ article.author.username) ]
+                    [ text article.author.username ]
+                , span [ class "date" ]
+                    [ text 
+                        (case (fromString article.updatedAt) of
+                            Err _ -> "..." -- What to really do here? 
+                            Ok d -> 
+                                format "%B %e, %Y" d) ]
+                ]
+            , button [ class "btn btn-outline-primary btn-sm pull-xs-right" ]
+                [ i [ class "ion-heart" ]
+                    []
+                , text (" " ++ (toString article.favoritesCount))
+                ]
+            ]
+        , a [ class "preview-link", href ("#/article/" ++ article.slug) ]
+            [ h1 []
+                [ text article.title ]
+            , p []
+                [ text 
+                    (case article.description of
+                        Just s -> s
+                        Nothing -> "") ]
+            , span []
+                [ text "Read more..." ]
+            ]
+        ]
+
 
 articleAuthorInfo : Profile -> Html Msg
 articleAuthorInfo author =

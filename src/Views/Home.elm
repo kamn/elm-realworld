@@ -3,51 +3,11 @@ module Views.Home exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 
+import Views.Article exposing (articlePreview)
+
 import Data.Article exposing (..)
 import Data.Msg exposing (Msg)
 import Data.User exposing (User)
-
-import Date.Format exposing (format)
-
-import Date exposing (fromString)
-
-articlePreview : Article -> Html Msg
-articlePreview article =
-    div [ class "article-preview" ]
-        [ div [ class "article-meta" ]
-            [ a [ href "profile.html" ]
-                [ img [ src article.author.image ]
-                    []
-                ]
-            , div [ class "info" ]
-                [ a [ class "author", href ("#/profile/" ++ article.author.username) ]
-                    [ text article.author.username ]
-                , span [ class "date" ]
-                    [ text 
-                        (case (fromString article.updatedAt) of
-                            Err _ -> "..." -- What to really do here? 
-                            Ok d -> 
-                                format "%B %e, %Y" d) ]
-                ]
-            , button [ class "btn btn-outline-primary btn-sm pull-xs-right" ]
-                [ i [ class "ion-heart" ]
-                    []
-                , text (" " ++ (toString article.favoritesCount))
-                ]
-            ]
-        , a [ class "preview-link", href ("#/article/" ++ article.slug) ]
-            [ h1 []
-                [ text article.title ]
-            , p []
-                [ text 
-                    (case article.description of
-                        Just s -> s
-                        Nothing -> "") ]
-            , span []
-                [ text "Read more..." ]
-            ]
-        ]
-
 
 home : Maybe User -> Articles -> List String -> Html Msg
 home user articles tags = 
