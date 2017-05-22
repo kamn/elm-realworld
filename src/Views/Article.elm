@@ -17,7 +17,7 @@ articlePreview : Article -> Html Msg
 articlePreview article =
     div [ class "article-preview" ]
         [ div [ class "article-meta" ]
-            [ a [ href "profile.html" ]
+            [ a [ href ("#/profile/" ++ article.author.username) ]
                 [ img [ src article.author.image ]
                     []
                 ]
