@@ -32,6 +32,7 @@ type alias Model =
   , tags : List String
   , user : Maybe User
   , profile : Maybe Profile
+  , profileArticles : Maybe Articles
   }
 
 model : Model
@@ -42,6 +43,7 @@ model =
   , tags = []
   , user = Nothing
   , profile = Nothing
+  , profileArticles = Nothing
   }
 
 
@@ -56,7 +58,10 @@ parseUrlChange model newRoute =
       Routes.Article s ->
         ({model | route = newRoute}, (Http.send ArticleReq (getArticle s)))
       Profile s ->
-        ({model | route = newRoute}, (Http.send ProfileReq (getProfile s)))
+        ({model | route = newRoute}, 
+         Cmd.batch
+         [ (Http.send ProfileReq (getProfile s))
+         , (Http.send ProfileArticlesReq (getUsersArticles s))])
       _ ->
         ({model | route = newRoute}, (Http.send HomeReq getArticles))
 
@@ -91,6 +96,13 @@ update msg model =
       (log "-----------")
       ({model | profile = Just data.profile}, Cmd.none)
     ProfileReq (_) ->
+      (model, Cmd.none)
+    ProfileArticlesReq(Ok data) ->
+      (log "-----------")
+      (log (toString data))
+      (log "-----------")
+      ({model | profileArticles = Just data}, Cmd.none)
+    ProfileArticlesReq(_) ->
       (model, Cmd.none)
 
 view : Model -> Html Msg

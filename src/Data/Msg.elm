@@ -15,3 +15,4 @@ type Msg
   | ArticleReq (Result Http.Error ArticleContainer)
   | TagsReq (Result Http.Error TagsContainer)
   | ProfileReq (Result Http.Error ProfileContainer)
+  | ProfileArticlesReq (Result Http.Error Articles)

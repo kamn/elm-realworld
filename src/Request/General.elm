@@ -76,3 +76,7 @@ getArticles =
 getProfile : String -> Http.Request ProfileContainer
 getProfile username =
   Http.get (baseUrl ++ profileApi ++ "/" ++ username) decodeProfileContainer
+
+getUsersArticles : String ->  Http.Request Articles
+getUsersArticles username =
+  Http.get (baseUrl ++ articlesApi ++ "?author=" ++ username) decodeArticles
