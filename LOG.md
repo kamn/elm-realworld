@@ -191,3 +191,8 @@ Going to try to get profiles loading.
 Got them loading and got it setup to get the data for the profile.
 I will need to fillout the rest of the profile page with data.
 I will also have to load the articles written and liked by the user.
+
+## May 21 2017 7:06 to
+Working on getting more data into the profile.
+Updated the view a little and also loading in articles written by the profile.
+I need to figure out a better way to deal with multiple calls when accessing a page.
