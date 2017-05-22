@@ -13,16 +13,19 @@ profile pro =
         [ div [ class "container" ]
             [ div [ class "row" ]
                 [ div [ class "col-xs-12 col-md-10 offset-md-1" ]
-                    [ img [ class "user-img", src "http://i.imgur.com/Qr71crq.jpg" ]
+                    [ img [ class "user-img", src pro.image ]
                         []
                     , h4 []
                         [ text (pro.username) ]
                     , p []
-                        [ text "Cofounder @GoThinkster, lived in Aol's HQ for a few months, kinda looks like Peeta from the Hunger Games          " ]
+                        [ text 
+                            (case pro.bio of 
+                                Just s -> s
+                                Nothing -> "") ]
                     , button [ class "btn btn-sm btn-outline-secondary action-btn" ]
                         [ i [ class "ion-plus-round" ]
                             []
-                        , text "             Follow Eric Simons           "
+                        , text (" Follow " ++ pro.username ++ " ")
                         ]
                     ]
                 ]
