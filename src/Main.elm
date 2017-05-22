@@ -111,34 +111,34 @@ view model =
     Home ->
       case model.mainPageData of
         Just articles ->
-          layout model.route (home model.user articles model.tags)
+          layout model.user model.route (home model.user articles model.tags)
         Nothing ->
           -- TODO display an error?
-          layout model.route (home model.user {articles = []} [])
+          layout model.user model.route (home model.user {articles = []} [])
     Settings ->
-      layout model.route settings
+      layout model.user model.route settings
     Login ->
-      layout model.route login
+      layout model.user model.route login
     Register ->
-      layout model.route register
+      layout model.user model.route register
     Profile s ->
       case model.profile of
         Just pro ->
-          layout model.route (profile pro model.profileArticles)
+          layout model.user model.route (profile pro model.profileArticles)
         Nothing ->
           -- TODO Should be something else
-          layout model.route (div [] [text "NotFound"])
+          layout model.user model.route (div [] [text "NotFound"])
     Editor ->
-      layout model.route editor
+      layout model.user model.route editor
     Routes.Article s ->
       case model.articleData of
         Just a ->
-          layout model.route (article a)
+          layout model.user model.route (article a)
         Nothing ->
           -- TODO display an error?
-          layout model.route (home model.user {articles = []} [])
+          layout model.user model.route (home model.user {articles = []} [])
     NotFoundRoute ->
-      layout model.route (div [] [text "NotFound"])
+      layout model.user model.route (div [] [text "NotFound"])
 
 init : Location -> (Model, Cmd Msg)
 init location =
