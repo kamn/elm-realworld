@@ -192,7 +192,17 @@ Got them loading and got it setup to get the data for the profile.
 I will need to fillout the rest of the profile page with data.
 I will also have to load the articles written and liked by the user.
 
-## May 21 2017 7:06 to
+## May 21 2017 - 7:06 to 7:21
 Working on getting more data into the profile.
 Updated the view a little and also loading in articles written by the profile.
 I need to figure out a better way to deal with multiple calls when accessing a page.
+
+## May 21 2017 - 9:10 to 9:25
+Work on displaying a users articles.
+Got it working I will also have to figure out a way to deal with switching between written articles and favorite articles
+
+## May 21 2017 - 9:25 to 9:40
+Fixed issue when you click on a username you get redirected to "profile.html".
+Also updated the layout to use the Maybe User to display certain things on the navbar.
+I think I will try to get all the non-logged in stuff done or mostly working before trying to figureout the logged in.
+I will have to figure out some localstorage stuff for that.
