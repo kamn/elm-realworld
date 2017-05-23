@@ -19,7 +19,7 @@ import Views.Article exposing (article)
 import Data.Article exposing (Articles, Article)
 import Data.User exposing (User)
 import Data.Profile exposing (Profile)
-
+import Data.Comment exposing (..)
 import Data.Msg exposing (Msg(..))
 
 -- ROUTING
@@ -29,6 +29,7 @@ type alias Model =
   { route : Route
   , mainPageData : Maybe Articles
   , articleData : Maybe Article
+  , commentsData : Maybe ArticleComments
   , tags : List String
   , user : Maybe User
   , profile : Maybe Profile
@@ -40,6 +41,7 @@ model =
   { route = Home
   , mainPageData = Nothing
   , articleData = Nothing
+  , commentsData = Nothing
   , tags = []
   , user = Nothing
   , profile = Nothing
@@ -56,7 +58,9 @@ parseUrlChange model newRoute =
           [ (Http.send HomeReq getArticles)
           , (Http.send TagsReq getTags)])
       Routes.Article s ->
-        ({model | route = newRoute}, (Http.send ArticleReq (getArticle s)))
+        ({model | route = newRoute}, 
+         Cmd.batch
+         [ (Http.send ArticleReq (getArticle s))])
       Profile s ->
         ({model | route = newRoute}, 
          Cmd.batch
@@ -83,6 +87,15 @@ update msg model =
       (log "-----------")
       ({model | articleData = Just data.article}, Cmd.none)
     ArticleReq (_) ->
+      (log "failed")
+      (log (toString msg))
+      (model, Cmd.none)
+    ArticleCommentsReq (Ok data) ->
+      (log "-----------")
+      (log (toString data))
+      (log "-----------")
+      ({model | commentsData = Just data}, Cmd.none)
+    ArticleCommentsReq (_) ->
       (log "failed")
       (log (toString msg))
       (model, Cmd.none)

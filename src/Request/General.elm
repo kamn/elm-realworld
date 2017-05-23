@@ -4,6 +4,7 @@ import Http
 import Json.Decode exposing (int, string, float, list, bool, nullable, Decoder)
 import Json.Decode.Pipeline exposing (decode, required, optional, hardcoded)
 
+import Data.Comment exposing (..)
 import Data.Article exposing (..)
 import Data.Profile exposing (..)
 
@@ -31,6 +32,20 @@ decodeProfileContainer : Decoder ProfileContainer
 decodeProfileContainer =
   decode ProfileContainer
     |> required "profile" decodeProfile
+
+decodeComment : Decoder Comment
+decodeComment =
+  decode Comment
+    |> required "id" int
+    |> required "createdAt" string
+    |> required "updatedAt" string
+    |> required "body" string
+    |> required "author" decodeProfile
+
+decodeArticleComments : Decoder ArticleComments
+decodeArticleComments =
+  decode ArticleComments
+    |> required "comments" (list decodeComment)
 
 decodeArticle : Decoder Article
 decodeArticle = 
@@ -69,6 +84,10 @@ getTags =
 getArticle : String -> Http.Request ArticleContainer
 getArticle slug =
   Http.get (baseUrl ++ articlesApi ++ "/" ++ slug) decodeArticleContainer
+
+getComments : String ->  Http.Request ArticleComments
+getComments slug =
+  Http.get (baseUrl ++ articlesApi ++ "/" ++ slug ++ "/comments" ) decodeArticleComments
 
 getArticles : Http.Request Articles
 getArticles =
