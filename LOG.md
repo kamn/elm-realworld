@@ -206,3 +206,10 @@ Fixed issue when you click on a username you get redirected to "profile.html".
 Also updated the layout to use the Maybe User to display certain things on the navbar.
 I think I will try to get all the non-logged in stuff done or mostly working before trying to figureout the logged in.
 I will have to figure out some localstorage stuff for that.
+
+## May 22 2017 - 7:16 to
+Going to look at getting the pagination at the bottom of the main page.
+They don't seem to have pagination in their templates.
+Got a basic dumb display wokring.
+I need to actually hook it up to real values.
+I wonder how many articles per page... Maybe the api spec talks about it. 
