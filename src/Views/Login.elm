@@ -14,7 +14,7 @@ login =
                 [ h1 [ class "text-xs-center" ]
                     [ text "Sign in" ]
                 , p [ class "text-xs-center" ]
-                    [ a [ href "" ]
+                    [ a [ href "#/register" ]
                         [ text "Need an account?" ]
                     ]
                 , Html.form []
