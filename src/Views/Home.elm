@@ -57,7 +57,7 @@ home user articles tags =
                     ]
                 , (List.concat 
                     [ (List.map articlePreview articles.articles)
-                    , [pagination 10]]) -- TODO : Get the correct number of pages
+                    , [pagination (articles.articlesCount // 20)]]) -- TODO : Can paginations be changed?
                 |> div []
                 ]
             , div [ class "col-md-3" ]

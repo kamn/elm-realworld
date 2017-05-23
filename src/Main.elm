@@ -114,7 +114,7 @@ view model =
           layout model.user model.route (home model.user articles model.tags)
         Nothing ->
           -- TODO display an error?
-          layout model.user model.route (home model.user {articles = []} [])
+          layout model.user model.route (home model.user {articles = [], articlesCount = 0} [])
     Settings ->
       layout model.user model.route settings
     Login ->
@@ -136,7 +136,7 @@ view model =
           layout model.user model.route (article a)
         Nothing ->
           -- TODO display an error?
-          layout model.user model.route (home model.user {articles = []} [])
+          layout model.user model.route (home model.user {articles = [], articlesCount = 0} [])
     NotFoundRoute ->
       layout model.user model.route (div [] [text "NotFound"])
 

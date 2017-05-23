@@ -55,6 +55,7 @@ decodeArticles : Decoder Articles
 decodeArticles =
   decode Articles
     |> required "articles" (list decodeArticle)
+    |> required "articlesCount" int
 
 decodeTagContainer : Decoder TagsContainer
 decodeTagContainer =

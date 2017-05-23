@@ -4,6 +4,7 @@ import Data.Profile exposing (Profile)
 
 type alias Articles =
   { articles: List Article
+  , articlesCount : Int
   }
 
 
