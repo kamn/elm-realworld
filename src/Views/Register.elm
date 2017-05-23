@@ -13,10 +13,15 @@ register =
             [ div [ class "col-md-6 offset-md-3 col-xs-12" ]
                 [ h1 [ class "text-xs-center" ]
                     [ text "Sign up" ]
-                , ul [ class "error-messages" ]
+                , p [ class "text-xs-center" ]
+                    [ a [ href "#/login" ]
+                        [ text "Have an account?" ]
+                    ]
+                    -- TODO : Have errors if there are errors
+                {-, ul [ class "error-messages" ]
                     [ li []
                         [ text "That email is already taken" ]
-                    ]
+                    ]-}
                 , Html.form []
                     [ fieldset [ class "form-group" ]
                         [ input [ class "form-control form-control-lg", placeholder "Your Name", type_ "text" ]
