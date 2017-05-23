@@ -9,6 +9,19 @@ import Data.Article exposing (..)
 import Data.Msg exposing (Msg)
 import Data.User exposing (User)
 
+paginationItem : Int -> Html Msg
+paginationItem page =
+    li [class "page-item"] -- TODO : Add class "active" to the current page
+       [a [class "page-link"]
+          [text (toString page)]]
+
+pagination : Int -> Html Msg
+pagination l =
+    (nav [] 
+        [ul [class "pagination"]
+            ((List.range 1 l)
+            |> (List.map paginationItem))])
+
 home : Maybe User -> Articles -> List String -> Html Msg
 home user articles tags = 
   div [ class "home-page" ]
@@ -42,7 +55,10 @@ home user articles tags =
                             ]
                         ]
                     ]
-                , (List.map articlePreview articles.articles) |> div []
+                , (List.concat 
+                    [ (List.map articlePreview articles.articles)
+                    , [pagination 10]]) -- TODO : Get the correct number of pages
+                |> div []
                 ]
             , div [ class "col-md-3" ]
                 [ div [ class "sidebar" ]
