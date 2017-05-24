@@ -207,9 +207,28 @@ Also updated the layout to use the Maybe User to display certain things on the n
 I think I will try to get all the non-logged in stuff done or mostly working before trying to figureout the logged in.
 I will have to figure out some localstorage stuff for that.
 
-## May 22 2017 - 7:16 to
+## May 22 2017 - 7:16 to 7:31
 Going to look at getting the pagination at the bottom of the main page.
 They don't seem to have pagination in their templates.
 Got a basic dumb display wokring.
 I need to actually hook it up to real values.
 I wonder how many articles per page... Maybe the api spec talks about it. 
+
+## May 22 2017 - 7:34 to 7:49
+From API the default is `20`.
+I also need to get the total number of articles.
+Though the example app has `10` per page...
+Did some minor fixes to the Sign Up and Sign in pages.
+I will probably work on loading in comments on articles next.
+
+## May 22 2017 - 7:50 to 8:05
+Added the basic code and functions to decode the comments and store them.
+
+## May 23 2017 - 8:40 to 8:55
+Got the comments displaying correctly.
+I am going to have to address issues in multiple places with logged in vs non-logged in user
+
+## May 23 2017 - 8:55 to 9:10
+On the article page I should hide certain things like follow and favorite post.
+Also making comments.
+Hide those things.
