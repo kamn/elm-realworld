@@ -147,7 +147,7 @@ view model =
     Routes.Article s ->
       case model.articleData of
         Just a ->
-          layout model.user model.route (article a model.commentsData)
+          layout model.user model.route (article model.user a model.commentsData)
         Nothing ->
           -- TODO display an error?
           layout model.user model.route (home model.user {articles = [], articlesCount = 0} [])

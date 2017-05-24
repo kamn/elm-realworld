@@ -6,6 +6,7 @@ import Html.Attributes exposing (..)
 import Data.Article exposing (Article)
 import Data.Profile exposing (Profile)
 import Data.Comment exposing (Comment)
+import Data.User exposing (User)
 
 import Data.Msg exposing (Msg)
 
@@ -52,8 +53,8 @@ articlePreview article =
         ]
 
 
-articleAuthorInfo : Profile -> Html Msg
-articleAuthorInfo author =
+articleAuthorInfo : Maybe User -> Profile -> Html Msg
+articleAuthorInfo user author =
   div [ class "article-meta" ]
       [ a [ href "profile.html" ]
           [ img [ src author.image ]
@@ -65,22 +66,26 @@ articleAuthorInfo author =
           , span [ class "date" ]
               [ text "January 20th" ]
           ]
-      , button [ class "btn btn-sm btn-outline-secondary" ]
-          [ i [ class "ion-plus-round" ]
-              []
-          , text (" Follow " ++ author.username ++ " ")
-          , span [ class "counter" ]
-              [ text "(10)" ]
-          ]
-      , text "         "
-      , button [ class "btn btn-sm btn-outline-primary" ]
-          [ i [ class "ion-heart" ]
-              []
-          , text "           Favorite Post "
-          , span [ class "counter" ]
-              [ text "(29)" ]
-          ]
-      ]
+      , (case user of
+            Just u -> span []
+                            [ button [ class "btn btn-sm btn-outline-secondary" ]
+                                [ i [ class "ion-plus-round" ]
+                                    []
+                                , text (" Follow " ++ author.username ++ " ")
+                                , span [ class "counter" ]
+                                    [ text "(10)" ]
+                                ]
+                            , text "         "
+                            , button [ class "btn btn-sm btn-outline-primary" ]
+                                [ i [ class "ion-heart" ]
+                                    []
+                                , text "           Favorite Post "
+                                , span [ class "counter" ]
+                                    [ text "(29)" ]
+                                ]
+                            ]
+            Nothing -> span [] [])
+        ]
 
 articleComment : Comment -> Html Msg
 articleComment comment =
@@ -112,38 +117,50 @@ articleComment comment =
             
         ]
 
-article : Article -> List Comment -> Html Msg
-article art comments =
+article : Maybe User -> Article -> List Comment -> Html Msg
+article user art comments =
   div [ class "article-page" ]
     [ div [ class "banner" ]
         [ div [ class "container" ]
             [ h1 []
                 [ text art.title ]
-            , articleAuthorInfo art.author
+            , articleAuthorInfo user art.author
             ]
         ]
     , div [ class "container page" ]
         -- TODO : There are certain classes on the example
         [ Markdown.toHtml [class "row article-content"] art.body
-        , hr []
-            []
-        , div [ class "article-actions" ]
-            [ articleAuthorInfo art.author
-            ]
+        , hr [] []
+        , (case user of
+            Just u ->
+                div [ class "article-actions" ]
+                    [ articleAuthorInfo user art.author]
+            Nothing -> div [] [])
         , div [ class "row" ]
             [ div [ class "col-xs-12 col-md-8 offset-md-2" ]
-                [ Html.form [ class "card comment-form" ]
-                    [ div [ class "card-block" ]
-                        [ textarea [ class "form-control", placeholder "Write a comment...", attribute "rows" "3" ]
-                            []
-                        ]
-                    , div [ class "card-footer" ]
-                        [ img [ class "comment-author-img", src "http://i.imgur.com/Qr71crq.jpg" ]
-                            []
-                        , button [ class "btn btn-sm btn-primary" ]
-                            [ text "Post Comment            " ]
-                        ]
-                    ]
+                [ (case user of 
+                    Just u -> 
+                        Html.form [ class "card comment-form" ]
+                                [ div [ class "card-block" ]
+                                    [ textarea [ class "form-control", placeholder "Write a comment...", attribute "rows" "3" ]
+                                        []
+                                    ]
+                                , div [ class "card-footer" ]
+                                    [ img [ class "comment-author-img", src "http://i.imgur.com/Qr71crq.jpg" ]
+                                        []
+                                    , button [ class "btn btn-sm btn-primary" ]
+                                        [ text "Post Comment            " ]
+                                    ]
+                                ]
+                    Nothing -> 
+                        p [ class "" ]
+                            [ a [ href "#/login" ]
+                                [ text "Sign in" ]
+                            , text " or "
+                            , a [ href "#/register" ]
+                                [ text "Sign up" ]
+                            , text " to add comments on this article."
+                            ])
                 , div []
                     (List.map articleComment comments)
                 ]
