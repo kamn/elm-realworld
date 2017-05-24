@@ -232,3 +232,12 @@ I am going to have to address issues in multiple places with logged in vs non-lo
 On the article page I should hide certain things like follow and favorite post.
 Also making comments.
 Hide those things.
+
+## May 23 2017 - 9:10 to 9:25
+Looking at the example app I realize that I don't have tags on my article previews...
+Also to the actual article.
+
+Upto this point I have not actually been setting up certain filters like tags ot pages.
+I will have to work on that now.
+
+I also think I have been using logs completely wrong...
