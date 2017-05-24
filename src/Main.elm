@@ -29,7 +29,7 @@ type alias Model =
   { route : Route
   , mainPageData : Maybe Articles
   , articleData : Maybe Article
-  , commentsData : Maybe ArticleComments
+  , commentsData : List Comment
   , tags : List String
   , user : Maybe User
   , profile : Maybe Profile
@@ -41,7 +41,7 @@ model =
   { route = Home
   , mainPageData = Nothing
   , articleData = Nothing
-  , commentsData = Nothing
+  , commentsData = []
   , tags = []
   , user = Nothing
   , profile = Nothing
@@ -60,7 +60,8 @@ parseUrlChange model newRoute =
       Routes.Article s ->
         ({model | route = newRoute}, 
          Cmd.batch
-         [ (Http.send ArticleReq (getArticle s))])
+         [ (Http.send ArticleReq (getArticle s))
+         , (Http.send ArticleCommentsReq (getComments s))])
       Profile s ->
         ({model | route = newRoute}, 
          Cmd.batch
@@ -94,7 +95,7 @@ update msg model =
       (log "-----------")
       (log (toString data))
       (log "-----------")
-      ({model | commentsData = Just data}, Cmd.none)
+      ({model | commentsData = data.comments}, Cmd.none)
     ArticleCommentsReq (_) ->
       (log "failed")
       (log (toString msg))
@@ -146,7 +147,7 @@ view model =
     Routes.Article s ->
       case model.articleData of
         Just a ->
-          layout model.user model.route (article a)
+          layout model.user model.route (article a model.commentsData)
         Nothing ->
           -- TODO display an error?
           layout model.user model.route (home model.user {articles = [], articlesCount = 0} [])

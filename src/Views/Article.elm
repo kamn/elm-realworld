@@ -5,6 +5,7 @@ import Html.Attributes exposing (..)
 
 import Data.Article exposing (Article)
 import Data.Profile exposing (Profile)
+import Data.Comment exposing (Comment)
 
 import Data.Msg exposing (Msg)
 
@@ -81,8 +82,38 @@ articleAuthorInfo author =
           ]
       ]
 
-article : Article -> Html Msg
-article art =
+articleComment : Comment -> Html Msg
+articleComment comment =
+    div [ class "card" ]
+        [ div [ class "card-block" ]
+            [ p [ class "card-text" ]
+                [ text comment.body ]
+            ]
+        , div [ class "card-footer" ]
+            [ a [ class "comment-author", href "" ]
+                [ img [ class "comment-author-img", src comment.author.image ]
+                    []
+                , text "            "
+                ]
+            , text "             "
+            , a [ class "comment-author", href "" ]
+                [ text comment.author.username ]
+            , span [ class "date-posted" ]
+                [ text (case (fromString comment.updatedAt) of
+                            Err _ -> "..." -- What to really do here? 
+                            Ok d -> 
+                                format "%B %e, %Y" d) ]
+            -- TODO : Display the correct information if this is the users comment or someone elses
+            {-, span [ class "mod-options" ]
+                   [ i [ class "ion-edit" ] []
+                   , i [ class "ion-trash-a" ] []
+                   ]-}
+            ]
+            
+        ]
+
+article : Article -> List Comment -> Html Msg
+article art comments =
   div [ class "article-page" ]
     [ div [ class "banner" ]
         [ div [ class "container" ]
@@ -92,19 +123,8 @@ article art =
             ]
         ]
     , div [ class "container page" ]
-        [ 
-            Markdown.toHtml [class "row article-content"] art.body
-            {-div [ class "row article-content" ]
-            [div [] [text art.body]]
-            {-[ div [ class "col-md-12" ]
-                [ p []
-                    [ text "Web development technologies have evolved at an incredible clip over the past few years.        " ]
-                , h2 [ id "introducing-ionic" ]
-                    [ text "Introducing RealWorld." ]
-                , p []
-                    [ text "It's a great solution for learning how other frameworks work." ]
-                ]
-            ]-}-}
+        -- TODO : There are certain classes on the example
+        [ Markdown.toHtml [class "row article-content"] art.body
         , hr []
             []
         , div [ class "article-actions" ]
@@ -124,48 +144,8 @@ article art =
                             [ text "Post Comment            " ]
                         ]
                     ]
-                , div [ class "card" ]
-                    [ div [ class "card-block" ]
-                        [ p [ class "card-text" ]
-                            [ text "With supporting text below as a natural lead-in to additional content." ]
-                        ]
-                    , div [ class "card-footer" ]
-                        [ a [ class "comment-author", href "" ]
-                            [ img [ class "comment-author-img", src "http://i.imgur.com/Qr71crq.jpg" ]
-                                []
-                            , text "            "
-                            ]
-                        , text "             "
-                        , a [ class "comment-author", href "" ]
-                            [ text "Jacob Schmidt" ]
-                        , span [ class "date-posted" ]
-                            [ text "Dec 29th" ]
-                        ]
-                    ]
-                , div [ class "card" ]
-                    [ div [ class "card-block" ]
-                        [ p [ class "card-text" ]
-                            [ text "With supporting text below as a natural lead-in to additional content." ]
-                        ]
-                    , div [ class "card-footer" ]
-                        [ a [ class "comment-author", href "" ]
-                            [ img [ class "comment-author-img", src "http://i.imgur.com/Qr71crq.jpg" ]
-                                []
-                            , text "            "
-                            ]
-                        , text "             "
-                        , a [ class "comment-author", href "" ]
-                            [ text "Jacob Schmidt" ]
-                        , span [ class "date-posted" ]
-                            [ text "Dec 29th" ]
-                        , span [ class "mod-options" ]
-                            [ i [ class "ion-edit" ]
-                                []
-                            , i [ class "ion-trash-a" ]
-                                []
-                            ]
-                        ]
-                    ]
+                , div []
+                    (List.map articleComment comments)
                 ]
             ]
         ]
