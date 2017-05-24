@@ -137,6 +137,7 @@ article user art comments =
     , div [ class "container page" ]
         -- TODO : There are certain classes on the example
         [ Markdown.toHtml [class "row article-content"] art.body
+        , div [] (List.map articlePreviewTag art.tagList)
         , hr [] []
         , (case user of
             Just u ->
