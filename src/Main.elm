@@ -74,6 +74,11 @@ parseUrlChange model newRoute =
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
+    -- CLIENT INTERACTIONS
+    FilterTag s ->
+      (log s)
+      (model, Cmd.none)
+    -- DATA REQUEST
     UrlChange loc ->
       parseUrlChange model (parseLocation loc)
     HomeReq (Ok data) ->

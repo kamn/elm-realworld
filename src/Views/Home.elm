@@ -2,11 +2,12 @@ module Views.Home exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (onClick)
 
 import Views.Article exposing (articlePreview)
 
 import Data.Article exposing (..)
-import Data.Msg exposing (Msg)
+import Data.Msg exposing (Msg(FilterTag))
 import Data.User exposing (User)
 
 paginationItem : Int -> Html Msg
@@ -67,7 +68,7 @@ home user articles tags =
                     , div [ class "tag-list" ]
                         (List.map 
                             (\tag -> 
-                                a [ class "tag-pill tag-default", href "" ]
+                                a [ class "tag-pill tag-default", href "", onClick (FilterTag tag)]
                                   [ text tag ]) tags)
                     ]
                 ]

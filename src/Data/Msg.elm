@@ -11,7 +11,8 @@ import Data.Profile exposing (..)
 -- UPDATE
 
 type Msg 
-  = UrlChange Navigation.Location
+  = FilterTag String
+  | UrlChange Navigation.Location
   | HomeReq (Result Http.Error Articles)
   | ArticleReq (Result Http.Error ArticleContainer)
   | ArticleCommentsReq (Result Http.Error ArticleComments)
