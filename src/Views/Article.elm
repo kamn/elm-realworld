@@ -15,6 +15,11 @@ import Date exposing (fromString)
 
 import Markdown as Markdown
 
+articlePreviewTag : String -> Html Msg
+articlePreviewTag tag =
+    li [class "tag-default tag-pill tag-outline"]
+       [text tag]
+
 articlePreview : Article -> Html Msg
 articlePreview article =
     div [ class "article-preview" ]
@@ -49,6 +54,8 @@ articlePreview article =
                         Nothing -> "") ]
             , span []
                 [ text "Read more..." ]
+            , ul [class "tag-list"]
+                (List.map articlePreviewTag article.tagList)
             ]
         ]
 
