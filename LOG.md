@@ -241,3 +241,16 @@ Upto this point I have not actually been setting up certain filters like tags ot
 I will have to work on that now.
 
 I also think I have been using logs completely wrong...
+
+## May 24 2017 - 9:13 to 9:28
+Worked on preventing the bubleing events when a a link is click.
+Sort of a fun jounrey.
+Ran into a google groups thread that lead me into looking at the internals of the html.events code.
+
+## May 24 2017 - 9:28 to 9:43
+Looking at the example app I see that there needs to be a separate tag on the main page when you click on a side tag...
+I am going to work on the profile articles and switching between.
+
+I am trying to think if I want to go though a clean up or not.
+Everything is working but I do think I could do some stuff to make it easier to work on.
+I am also thinking of centeralizing all strings that are displayed to a user.
