@@ -7,6 +7,7 @@ import Json.Decode as Json
 
 import Views.Article exposing (articlePreview)
 
+import Utils exposing (..)
 import Data.Article exposing (..)
 import Data.Msg exposing (Msg(FilterTag))
 import Data.User exposing (User)
@@ -23,11 +24,6 @@ pagination l =
         [ul [class "pagination"]
             ((List.range 1 l)
             |> (List.map paginationItem))])
-
--- TODO Move somewhere else?
-onNoBubbleClick : msg -> Attribute msg
-onNoBubbleClick msg =
-    onWithOptions "click" {defaultOptions | preventDefault = True} (Json.succeed msg) 
 
 home : Maybe User -> Articles -> List String -> Html Msg
 home user articles tags = 

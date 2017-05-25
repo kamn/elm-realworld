@@ -6,7 +6,11 @@ import Html.Attributes exposing (..)
 import Data.Msg exposing (Msg)
 import Data.Profile exposing (Profile)
 import Data.Article exposing (Article)
+
+import Utils exposing (..)
+
 import Views.Article exposing (articlePreview)
+
 
 profile : Profile -> List Article -> Html Msg
 profile pro articles =
@@ -39,11 +43,11 @@ profile pro articles =
                 [ div [ class "articles-toggle" ]
                     [ ul [ class "nav nav-pills outline-active" ]
                         [ li [ class "nav-item" ]
-                            [ a [ class "nav-link active", href "" ]
+                            [ a [ class "nav-link active", href ("#/profile/" ++ pro.username)]
                                 [ text "My Articles" ]
                             ]
                         , li [ class "nav-item" ]
-                            [ a [ class "nav-link", href "" ]
+                            [ a [ class "nav-link", href "", onNoBubbleClick (Data.Msg.ProfileFavArticles pro.username)]
                                 [ text "Favorited Articles" ]
                             ]
                         ]

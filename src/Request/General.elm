@@ -104,3 +104,7 @@ getProfile username =
 getUsersArticles : String ->  Http.Request Articles
 getUsersArticles username =
   Http.get (baseUrl ++ articlesApi ++ "?author=" ++ username) decodeArticles
+
+getUsersFavoriteArticles : String ->  Http.Request Articles
+getUsersFavoriteArticles username =
+  Http.get (baseUrl ++ articlesApi ++ "?favorited=" ++ username) decodeArticles

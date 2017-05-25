@@ -12,6 +12,7 @@ import Data.Profile exposing (..)
 
 type Msg 
   = FilterTag String
+  | ProfileFavArticles String
   | UrlChange Navigation.Location
   | HomeReq (Result Http.Error Articles)
   | ArticleReq (Result Http.Error ArticleContainer)

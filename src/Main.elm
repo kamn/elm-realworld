@@ -34,6 +34,7 @@ type alias Model =
   , user : Maybe User
   , profile : Maybe Profile
   , profileArticles : List Article
+  , profileFavArticles : List Article
   }
 
 model : Model
@@ -46,6 +47,7 @@ model =
   , user = Nothing
   , profile = Nothing
   , profileArticles = []
+  , profileFavArticles = []
   }
 
 
@@ -79,6 +81,8 @@ update msg model =
       (log s)
       -- getFilteredArticlesByTag
       (model, (Http.send HomeReq (getFilteredArticlesByTag s)))
+    ProfileFavArticles u ->
+      (model, (Http.send ProfileArticlesReq (getUsersFavoriteArticles u)))
     -- DATA REQUEST
     UrlChange loc ->
       parseUrlChange model (parseLocation loc)
