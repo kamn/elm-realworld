@@ -77,7 +77,8 @@ update msg model =
     -- CLIENT INTERACTIONS
     FilterTag s ->
       (log s)
-      (model, Cmd.none)
+      -- getFilteredArticlesByTag
+      (model, (Http.send HomeReq (getFilteredArticlesByTag s)))
     -- DATA REQUEST
     UrlChange loc ->
       parseUrlChange model (parseLocation loc)

@@ -2,7 +2,8 @@ module Views.Home exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (onClick)
+import Html.Events exposing (onClick, on, onWithOptions, Options, defaultOptions)
+import Json.Decode as Json
 
 import Views.Article exposing (articlePreview)
 
@@ -22,6 +23,11 @@ pagination l =
         [ul [class "pagination"]
             ((List.range 1 l)
             |> (List.map paginationItem))])
+
+-- TODO Move somewhere else?
+onNoBubbleClick : msg -> Attribute msg
+onNoBubbleClick msg =
+    onWithOptions "click" {defaultOptions | preventDefault = True} (Json.succeed msg) 
 
 home : Maybe User -> Articles -> List String -> Html Msg
 home user articles tags = 
@@ -68,7 +74,7 @@ home user articles tags =
                     , div [ class "tag-list" ]
                         (List.map 
                             (\tag -> 
-                                a [ class "tag-pill tag-default", href "", onClick (FilterTag tag)]
+                                a [ class "tag-pill tag-default", href "", onNoBubbleClick (FilterTag tag)]
                                   [ text tag ]) tags)
                     ]
                 ]

@@ -93,6 +93,10 @@ getArticles : Http.Request Articles
 getArticles =
   Http.get (baseUrl ++ articlesApi) decodeArticles
 
+getFilteredArticlesByTag : String -> Http.Request Articles
+getFilteredArticlesByTag tag =
+  Http.get (baseUrl ++ articlesApi ++ "?tag=" ++ tag) decodeArticles
+
 getProfile : String -> Http.Request ProfileContainer
 getProfile username =
   Http.get (baseUrl ++ profileApi ++ "/" ++ username) decodeProfileContainer
