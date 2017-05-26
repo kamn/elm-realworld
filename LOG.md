@@ -254,3 +254,7 @@ I am going to work on the profile articles and switching between.
 I am trying to think if I want to go though a clean up or not.
 Everything is working but I do think I could do some stuff to make it easier to work on.
 I am also thinking of centeralizing all strings that are displayed to a user.
+
+## May 25 2017 - 7:08 to 
+Add some text if no articles are found in a user's profile.
+Also got the tab highlighting working on the profile page.
