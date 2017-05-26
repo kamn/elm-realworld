@@ -18,7 +18,7 @@ import Views.Article exposing (article)
 
 import Data.Article exposing (Articles, Article)
 import Data.User exposing (User)
-import Data.Profile exposing (Profile)
+import Data.Profile exposing (Profile, ProfileArticleView(..))
 import Data.Comment exposing (..)
 import Data.Msg exposing (Msg(..))
 
@@ -35,6 +35,7 @@ type alias Model =
   , profile : Maybe Profile
   , profileArticles : List Article
   , profileFavArticles : List Article
+  , profileView : ProfileArticleView
   }
 
 model : Model
@@ -48,6 +49,7 @@ model =
   , profile = Nothing
   , profileArticles = []
   , profileFavArticles = []
+  , profileView = MyArticles
   }
 
 
@@ -65,7 +67,7 @@ parseUrlChange model newRoute =
          [ (Http.send ArticleReq (getArticle s))
          , (Http.send ArticleCommentsReq (getComments s))])
       Profile s ->
-        ({model | route = newRoute}, 
+        ({model | route = newRoute, profileView = MyArticles}, 
          Cmd.batch
          [ (Http.send ProfileReq (getProfile s))
          , (Http.send ProfileArticlesReq (getUsersArticles s))])
@@ -82,7 +84,7 @@ update msg model =
       -- getFilteredArticlesByTag
       (model, (Http.send HomeReq (getFilteredArticlesByTag s)))
     ProfileFavArticles u ->
-      (model, (Http.send ProfileArticlesReq (getUsersFavoriteArticles u)))
+      ({model | profileView = FavoritedArticles}, (Http.send ProfileArticlesReq (getUsersFavoriteArticles u)))
     -- DATA REQUEST
     UrlChange loc ->
       parseUrlChange model (parseLocation loc)
@@ -148,7 +150,7 @@ view model =
     Profile s ->
       case model.profile of
         Just pro ->
-          layout model.user model.route (profile pro model.profileArticles)
+          layout model.user model.route (profile pro model.profileView model.profileArticles)
         Nothing ->
           -- TODO Should be something else
           layout model.user model.route (div [] [text "NotFound"])

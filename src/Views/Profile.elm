@@ -4,16 +4,22 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 
 import Data.Msg exposing (Msg)
-import Data.Profile exposing (Profile)
+import Data.Profile exposing (Profile, ProfileArticleView(..))
 import Data.Article exposing (Article)
 
 import Utils exposing (..)
 
 import Views.Article exposing (articlePreview)
 
+profileTabClass : ProfileArticleView -> ProfileArticleView -> String
+profileTabClass expected passed =
+    if expected == passed then
+        "nav-link active"
+    else 
+        "nav-link"
 
-profile : Profile -> List Article -> Html Msg
-profile pro articles =
+profile : Profile -> ProfileArticleView-> List Article -> Html Msg
+profile pro view articles =
   div [ class "profile-page" ]
     [ div [ class "user-info" ]
         [ div [ class "container" ]
@@ -43,16 +49,19 @@ profile pro articles =
                 [ div [ class "articles-toggle" ]
                     [ ul [ class "nav nav-pills outline-active" ]
                         [ li [ class "nav-item" ]
-                            [ a [ class "nav-link active", href ("#/profile/" ++ pro.username)]
+                            [ a [ class (profileTabClass MyArticles view), href ("#/profile/" ++ pro.username)]
                                 [ text "My Articles" ]
                             ]
                         , li [ class "nav-item" ]
-                            [ a [ class "nav-link", href "", onNoBubbleClick (Data.Msg.ProfileFavArticles pro.username)]
+                            [ a [ class (profileTabClass FavoritedArticles view), href "", onNoBubbleClick (Data.Msg.ProfileFavArticles pro.username)]
                                 [ text "Favorited Articles" ]
                             ]
                         ]
                     ]
-                , (List.map articlePreview articles) |> div []
+                , (if (List.length articles) /= 0 then
+                    (List.map articlePreview articles) |> div []
+                   else 
+                    div [class "article-preview"] [text "No articles are here... yet."])
                 ]
             ]
         ]

@@ -1,5 +1,7 @@
 module Data.Profile exposing (..)
 
+type ProfileArticleView = MyArticles | FavoritedArticles
+
 type alias ProfileContainer =
   { profile: Profile}
 
