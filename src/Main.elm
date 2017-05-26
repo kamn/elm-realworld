@@ -36,6 +36,7 @@ type alias Model =
   , profileArticles : List Article
   , profileFavArticles : List Article
   , profileView : ProfileArticleView
+  , selectedTag : Maybe String
   }
 
 model : Model
@@ -50,6 +51,7 @@ model =
   , profileArticles = []
   , profileFavArticles = []
   , profileView = MyArticles
+  , selectedTag = Nothing
   }
 
 
@@ -82,7 +84,7 @@ update msg model =
     FilterTag s ->
       (log s)
       -- getFilteredArticlesByTag
-      (model, (Http.send HomeReq (getFilteredArticlesByTag s)))
+      ({model | selectedTag = Just s}, (Http.send HomeReq (getFilteredArticlesByTag s)))
     ProfileFavArticles u ->
       ({model | profileView = FavoritedArticles}, (Http.send ProfileArticlesReq (getUsersFavoriteArticles u)))
     -- DATA REQUEST
@@ -137,10 +139,10 @@ view model =
     Home ->
       case model.mainPageData of
         Just articles ->
-          layout model.user model.route (home model.user articles model.tags)
+          layout model.user model.route (home model.user articles model.selectedTag model.tags)
         Nothing ->
           -- TODO display an error?
-          layout model.user model.route (home model.user {articles = [], articlesCount = 0} [])
+          layout model.user model.route (home model.user {articles = [], articlesCount = 0} model.selectedTag [])
     Settings ->
       layout model.user model.route settings
     Login ->
@@ -162,7 +164,7 @@ view model =
           layout model.user model.route (article model.user a model.commentsData)
         Nothing ->
           -- TODO display an error?
-          layout model.user model.route (home model.user {articles = [], articlesCount = 0} [])
+          layout model.user model.route (home model.user {articles = [], articlesCount = 0} model.selectedTag [])
     NotFoundRoute ->
       layout model.user model.route (div [] [text "NotFound"])
 

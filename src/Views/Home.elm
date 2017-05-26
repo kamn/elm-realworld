@@ -2,8 +2,6 @@ module Views.Home exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (onClick, on, onWithOptions, Options, defaultOptions)
-import Json.Decode as Json
 
 import Views.Article exposing (articlePreview)
 
@@ -25,8 +23,8 @@ pagination l =
             ((List.range 1 l)
             |> (List.map paginationItem))])
 
-home : Maybe User -> Articles -> List String -> Html Msg
-home user articles tags = 
+home : Maybe User -> Articles -> Maybe String -> List String -> Html Msg
+home user articles selectedTag tags = 
   div [ class "home-page" ]
     [ div [ class "banner" ]
         [ div [ class "container" ]
@@ -56,6 +54,13 @@ home user articles tags =
                             [ a [ class "nav-link active", href "" ]
                                 [ text "Global Feed" ]
                             ]
+                        , (case selectedTag of 
+                            Just stag ->
+                                li [ class "nav-item" ]
+                                   [ a [ class "nav-link", href "" ]
+                                      [ i [class "ion-pound"] []
+                                      , text (" " ++ stag) ]]
+                            Nothing -> span [] [])
                         ]
                     ]
                 , (List.concat 
