@@ -255,6 +255,16 @@ I am trying to think if I want to go though a clean up or not.
 Everything is working but I do think I could do some stuff to make it easier to work on.
 I am also thinking of centeralizing all strings that are displayed to a user.
 
-## May 25 2017 - 7:08 to 
+## May 25 2017 - 7:08 to 7:23
 Add some text if no articles are found in a user's profile.
 Also got the tab highlighting working on the profile page.
+
+## May 25 2017 - 7:32 to 7:47
+Looking into adding an additional tab on the main page for when a tag is selected.
+Need to make it select like it is active.
+Then is is on to pagniations.
+I also need to have a case for tags + pages.
+
+I also am sort of clueless about the local storage for Elm and authentication.
+Maybe I can do that late in the game.
+Just keep credentials in the local memory.
