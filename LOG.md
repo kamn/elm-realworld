@@ -274,3 +274,8 @@ Just some general clean up.
 Ran elm-format
 Also ran elm-analyse.
 Cleaned up some issues.
+
+## May 2017 - 10:28 to 10:43
+Continue with using elm-analyse.
+Not sure if I agree with everything it recommends(import all from namespace) but it is supercool.
+Also Sum types... Maybe a little too far...
