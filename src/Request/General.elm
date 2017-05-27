@@ -1,8 +1,8 @@
 module Request.General exposing (..)
 
 import Http
-import Json.Decode exposing (int, string, float, list, bool, nullable, Decoder)
-import Json.Decode.Pipeline exposing (decode, required, optional, hardcoded)
+import Json.Decode exposing (int, string, list, bool, nullable, Decoder)
+import Json.Decode.Pipeline exposing (decode, required)
 import Data.Comment exposing (..)
 import Data.Article exposing (..)
 import Data.Profile exposing (..)

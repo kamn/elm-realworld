@@ -134,7 +134,9 @@ layout : Maybe User -> Route -> Html Msg -> Html Msg
 layout maybeUser route container =
     div [ class "page-frame" ]
         [ stylesheet "//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"
-        , stylesheet "//fonts.googleapis.com/css?family=Titillium+Web:700|Source+Serif+Pro:400,700|Merriweather+Sans:400,700|Source+Sans+Pro:400,300,600,700,300italic,400italic,600italic,700italic"
+        , stylesheet ("//fonts.googleapis.com/css?family=Titillium+Web:700"
+                     ++ "|Source+Serif+Pro:400,700|Merriweather+Sans:400,700"
+                     ++ "|Source+Sans+Pro:400,300,600,700,300italic,400italic,600italic,700italic")
         , stylesheet "//demo.productionready.io/main.css"
         , node "style"
             [ type_ "text/css" ]
@@ -145,7 +147,7 @@ layout maybeUser route container =
                     [ text "conduit" ]
                 , ul [ class "nav navbar-nav pull-xs-right" ]
                     (case maybeUser of
-                        Just user ->
+                        Just _ ->
                             getLoggedInNav route
 
                         Nothing ->

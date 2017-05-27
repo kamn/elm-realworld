@@ -1,6 +1,6 @@
 module Main exposing (..)
 
-import Html exposing (Html, text, div, button)
+import Html exposing (Html, text, div)
 import Debug exposing (log)
 import Navigation exposing (Location)
 import Http
@@ -88,7 +88,7 @@ parseUrlChange model newRoute =
             )
 
         _ ->
-            ( { model | route = newRoute }, (Http.send HomeReq getArticles) )
+            ( { model | route = newRoute }, Http.send HomeReq getArticles )
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -96,7 +96,7 @@ update msg model =
     case msg of
         -- CLIENT INTERACTIONS
         FilterTag s ->
-            (log s)
+            log s
                 -- getFilteredArticlesByTag
                 ( { model | selectedTag = Just s }, Http.send HomeReq (getFilteredArticlesByTag s) )
 
@@ -111,29 +111,29 @@ update msg model =
             ( { model | mainPageData = Just data }, Cmd.none )
 
         HomeReq _ ->
-            (log "failed")
+            log "failed"
                 (log (toString msg))
                 ( model, Cmd.none )
 
         ArticleReq (Ok data) ->
-            (log "-----------")
+            log "-----------"
                 (log (toString data))
                 (log "-----------")
                 ( { model | articleData = Just data.article }, Cmd.none )
 
         ArticleReq _ ->
-            (log "failed")
+            log "failed"
                 (log (toString msg))
                 ( model, Cmd.none )
 
         ArticleCommentsReq (Ok data) ->
-            (log "-----------")
+            log "-----------"
                 (log (toString data))
                 (log "-----------")
                 ( { model | commentsData = data.comments }, Cmd.none )
 
         ArticleCommentsReq _ ->
-            (log "failed")
+            log "failed"
                 (log (toString msg))
                 ( model, Cmd.none )
 
@@ -144,7 +144,7 @@ update msg model =
             ( model, Cmd.none )
 
         ProfileReq (Ok data) ->
-            (log "-----------")
+            log "-----------"
                 (log (toString data))
                 (log "-----------")
                 ( { model | profile = Just data.profile }, Cmd.none )
@@ -153,7 +153,7 @@ update msg model =
             ( model, Cmd.none )
 
         ProfileArticlesReq (Ok data) ->
-            (log "-----------")
+            log "-----------"
                 (log (toString data.articles))
                 (log "-----------")
                 ( { model | profileArticles = data.articles }, Cmd.none )
@@ -183,7 +183,7 @@ view model =
         Register ->
             layout model.user model.route register
 
-        Profile s ->
+        Profile _ ->
             case model.profile of
                 Just pro ->
                     layout model.user model.route (profile pro model.profileView model.profileArticles)
@@ -195,7 +195,7 @@ view model =
         Editor ->
             layout model.user model.route editor
 
-        Routes.Article s ->
+        Routes.Article _ ->
             case model.articleData of
                 Just a ->
                     layout model.user model.route (article model.user a model.commentsData)
@@ -223,5 +223,5 @@ main =
         { init = init
         , view = view
         , update = update
-        , subscriptions = (\_ -> Sub.none)
+        , subscriptions = \_ -> Sub.none
         }

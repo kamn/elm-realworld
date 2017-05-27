@@ -27,7 +27,7 @@ profile pro view articles =
                         [ img [ class "user-img", src pro.image ]
                             []
                         , h4 []
-                            [ text (pro.username) ]
+                            [ text pro.username ]
                         , p []
                             [ text
                                 (case pro.bio of
@@ -66,11 +66,10 @@ profile pro view articles =
                                 ]
                             ]
                         ]
-                    , (if (List.length articles) /= 0 then
-                        (List.map articlePreview articles) |> div []
-                       else
+                    , if List.length articles /= 0 then
+                        List.map articlePreview articles |> div []
+                      else
                         div [ class "article-preview" ] [ text "No articles are here... yet." ]
-                      )
                     ]
                 ]
             ]

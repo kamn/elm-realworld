@@ -31,7 +31,7 @@ articlePreview article =
                     [ text article.author.username ]
                 , span [ class "date" ]
                     [ text
-                        (case (fromString article.updatedAt) of
+                        (case fromString article.updatedAt of
                             Err _ ->
                                 "..."
 
@@ -81,8 +81,8 @@ articleAuthorInfo user author =
             , span [ class "date" ]
                 [ text "January 20th" ]
             ]
-        , (case user of
-            Just u ->
+        , case user of
+            Just _ ->
                 span []
                     [ button [ class "btn btn-sm btn-outline-secondary" ]
                         [ i [ class "ion-plus-round" ]
@@ -103,7 +103,6 @@ articleAuthorInfo user author =
 
             Nothing ->
                 span [] []
-          )
         ]
 
 
@@ -125,7 +124,7 @@ articleComment comment =
                 [ text comment.author.username ]
             , span [ class "date-posted" ]
                 [ text
-                    (case (fromString comment.updatedAt) of
+                    (case fromString comment.updatedAt of
                         Err _ ->
                             "..."
 
@@ -160,18 +159,17 @@ article user art comments =
             [ Markdown.toHtml [ class "row article-content" ] art.body
             , div [] (List.map articlePreviewTag art.tagList)
             , hr [] []
-            , (case user of
-                Just u ->
+            , case user of
+                Just _ ->
                     div [ class "article-actions" ]
                         [ articleAuthorInfo user art.author ]
 
                 Nothing ->
                     div [] []
-              )
             , div [ class "row" ]
                 [ div [ class "col-xs-12 col-md-8 offset-md-2" ]
-                    [ (case user of
-                        Just u ->
+                    [ case user of
+                        Just _ ->
                             Html.form [ class "card comment-form" ]
                                 [ div [ class "card-block" ]
                                     [ textarea [ class "form-control", placeholder "Write a comment...", attribute "rows" "3" ]
@@ -194,7 +192,6 @@ article user art comments =
                                     [ text "Sign up" ]
                                 , text " to add comments on this article."
                                 ]
-                      )
                     , div []
                         (List.map articleComment comments)
                     ]

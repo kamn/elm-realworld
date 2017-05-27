@@ -20,13 +20,12 @@ paginationItem page =
 
 pagination : Int -> Html Msg
 pagination l =
-    (nav []
+    nav []
         [ ul [ class "pagination" ]
             (List.range 1 l
                 |> List.map paginationItem
             )
         ]
-    )
 
 
 home : Maybe User -> Articles -> Maybe String -> List String -> Html Msg
@@ -49,7 +48,7 @@ home user articles selectedTag tags =
                                 [ class "nav-item"
                                 , style
                                     (case user of
-                                        Just m ->
+                                        Just _ ->
                                             []
 
                                         Nothing ->
@@ -63,7 +62,7 @@ home user articles selectedTag tags =
                                 [ a [ class "nav-link active", href "" ]
                                     [ text "Global Feed" ]
                                 ]
-                            , (case selectedTag of
+                            , case selectedTag of
                                 Just stag ->
                                     li [ class "nav-item" ]
                                         [ a [ class "nav-link", href "" ]
@@ -74,14 +73,12 @@ home user articles selectedTag tags =
 
                                 Nothing ->
                                     span [] []
-                              )
                             ]
                         ]
-                    , (List.concat
-                        [ (List.map articlePreview articles.articles)
+                    , List.concat
+                        [ List.map articlePreview articles.articles
                         , [ pagination (articles.articlesCount // 20) ]
                         ]
-                      )
                         -- TODO : Can paginations be changed?
                         |> div []
                     ]
