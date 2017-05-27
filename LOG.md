@@ -268,3 +268,9 @@ I also need to have a case for tags + pages.
 I also am sort of clueless about the local storage for Elm and authentication.
 Maybe I can do that late in the game.
 Just keep credentials in the local memory.
+
+## May 26 2017 - 10:12 to 10:27
+Just some general clean up.
+Ran elm-format
+Also ran elm-analyse.
+Cleaned up some issues.
