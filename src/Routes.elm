@@ -30,7 +30,7 @@ route =
 
 parseLocation : Location -> Route
 parseLocation location =
-    case (parseHash route location) of
+    case parseHash route location of
         Just r ->
             r
 

@@ -66,24 +66,24 @@ parseUrlChange model newRoute =
         Home ->
             ( { model | route = newRoute }
             , Cmd.batch
-                [ (Http.send HomeReq getArticles)
-                , (Http.send TagsReq getTags)
+                [ Http.send HomeReq getArticles
+                , Http.send TagsReq getTags
                 ]
             )
 
         Routes.Article s ->
             ( { model | route = newRoute }
             , Cmd.batch
-                [ (Http.send ArticleReq (getArticle s))
-                , (Http.send ArticleCommentsReq (getComments s))
+                [ Http.send ArticleReq (getArticle s)
+                , Http.send ArticleCommentsReq (getComments s)
                 ]
             )
 
         Profile s ->
             ( { model | route = newRoute, profileView = MyArticles }
             , Cmd.batch
-                [ (Http.send ProfileReq (getProfile s))
-                , (Http.send ProfileArticlesReq (getUsersArticles s))
+                [ Http.send ProfileReq (getProfile s)
+                , Http.send ProfileArticlesReq (getUsersArticles s)
                 ]
             )
 
@@ -98,10 +98,10 @@ update msg model =
         FilterTag s ->
             (log s)
                 -- getFilteredArticlesByTag
-                ( { model | selectedTag = Just s }, (Http.send HomeReq (getFilteredArticlesByTag s)) )
+                ( { model | selectedTag = Just s }, Http.send HomeReq (getFilteredArticlesByTag s) )
 
         ProfileFavArticles u ->
-            ( { model | profileView = FavoritedArticles }, (Http.send ProfileArticlesReq (getUsersFavoriteArticles u)) )
+            ( { model | profileView = FavoritedArticles }, Http.send ProfileArticlesReq (getUsersFavoriteArticles u) )
 
         -- DATA REQUEST
         UrlChange loc ->

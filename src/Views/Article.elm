@@ -44,7 +44,7 @@ articlePreview article =
             , button [ class "btn btn-outline-primary btn-sm pull-xs-right" ]
                 [ i [ class "ion-heart" ]
                     []
-                , text (" " ++ (toString article.favoritesCount))
+                , text (" " ++ toString article.favoritesCount)
                 ]
             ]
         , a [ class "preview-link", href ("#/article/" ++ article.slug) ]

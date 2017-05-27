@@ -57,7 +57,11 @@ profile pro view articles =
                                     [ text "My Articles" ]
                                 ]
                             , li [ class "nav-item" ]
-                                [ a [ class (profileTabClass FavoritedArticles view), href "", onNoBubbleClick (Data.Msg.ProfileFavArticles pro.username) ]
+                                [ a
+                                    [ class (profileTabClass FavoritedArticles view)
+                                    , href ""
+                                    , onNoBubbleClick (Data.Msg.ProfileFavArticles pro.username)
+                                    ]
                                     [ text "Favorited Articles" ]
                                 ]
                             ]

@@ -22,8 +22,8 @@ pagination : Int -> Html Msg
 pagination l =
     (nav []
         [ ul [ class "pagination" ]
-            ((List.range 1 l)
-                |> (List.map paginationItem)
+            (List.range 1 l
+                |> List.map paginationItem
             )
         ]
     )
