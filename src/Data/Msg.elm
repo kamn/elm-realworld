@@ -1,10 +1,10 @@
-module Data.Msg exposing (..)
+module Data.Msg exposing (Msg(..))
 
 import Navigation exposing (Location)
 import Http
-import Data.Comment exposing (..)
-import Data.Article exposing (..)
-import Data.Profile exposing (..)
+import Data.Comment exposing (Comment, ArticleComments)
+import Data.Article exposing (Articles, TagsContainer, ArticleContainer, Article)
+import Data.Profile exposing (ProfileArticleView(..), ProfileContainer, Profile)
 
 
 -- UPDATE

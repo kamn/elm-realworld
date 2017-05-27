@@ -1,4 +1,4 @@
-module Data.Comment exposing (..)
+module Data.Comment exposing (Comment, ArticleComments)
 
 import Data.Profile exposing (Profile)
 

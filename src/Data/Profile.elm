@@ -1,4 +1,4 @@
-module Data.Profile exposing (..)
+module Data.Profile exposing (ProfileArticleView(..), ProfileContainer, Profile)
 
 
 type ProfileArticleView

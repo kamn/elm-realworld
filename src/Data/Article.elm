@@ -1,4 +1,4 @@
-module Data.Article exposing (..)
+module Data.Article exposing (Articles, TagsContainer, ArticleContainer, Article)
 
 import Data.Profile exposing (Profile)
 
