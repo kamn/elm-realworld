@@ -5,7 +5,7 @@ import Html.Attributes exposing (..)
 import Views.Article exposing (articlePreview)
 import Utils exposing (..)
 import Data.Article exposing (..)
-import Data.Msg exposing (Msg(FilterTag))
+import Data.Msg exposing (Msg(FilterTag, FilterPage))
 import Data.User exposing (User)
 
 
@@ -13,7 +13,7 @@ paginationItem : Int -> Html Msg
 paginationItem page =
     li [ class "page-item" ]
         -- TODO : Add class "active" to the current page
-        [ a [ class "page-link" ]
+        [ a [ class "page-link", href "", onNoBubbleClick (FilterPage page) ]
             [ text (toString page) ]
         ]
 

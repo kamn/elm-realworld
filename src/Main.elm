@@ -41,6 +41,7 @@ type alias Model =
     , profileFavArticles : List Article
     , profileView : ProfileArticleView
     , selectedTag : Maybe String
+    , selectedPage : Maybe Int
     }
 
 
@@ -57,6 +58,7 @@ model =
     , profileFavArticles = []
     , profileView = MyArticles
     , selectedTag = Nothing
+    , selectedPage = Nothing
     }
 
 
@@ -99,6 +101,8 @@ update msg model =
             log s
                 -- getFilteredArticlesByTag
                 ( { model | selectedTag = Just s }, Http.send HomeReq (getFilteredArticlesByTag s) )
+        FilterPage s ->
+            ( { model | selectedPage = Just s }, Http.send HomeReq (getFilteredArticlesByPage s) )
 
         ProfileFavArticles u ->
             ( { model | profileView = FavoritedArticles }, Http.send ProfileArticlesReq (getUsersFavoriteArticles u) )

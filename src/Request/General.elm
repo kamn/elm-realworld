@@ -117,6 +117,9 @@ getFilteredArticlesByTag : String -> Http.Request Articles
 getFilteredArticlesByTag tag =
     Http.get (baseUrl ++ articlesApi ++ "?tag=" ++ tag) decodeArticles
 
+getFilteredArticlesByPage : Int -> Http.Request Articles
+getFilteredArticlesByPage pageNum =
+    Http.get (baseUrl ++ articlesApi ++ "?offset=" ++ (toString (pageNum * 20))) decodeArticles
 
 getProfile : String -> Http.Request ProfileContainer
 getProfile username =
