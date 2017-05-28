@@ -275,7 +275,11 @@ Ran elm-format
 Also ran elm-analyse.
 Cleaned up some issues.
 
-## May 2017 - 10:28 to 10:43
+## May 26 2017 - 10:28 to 10:43
 Continue with using elm-analyse.
 Not sure if I agree with everything it recommends(import all from namespace) but it is supercool.
 Also Sum types... Maybe a little too far...
+
+## May 27 2017 - 21:55 to 22:10
+Added the ability to click a page and get something else to load.
+I also need to highlight the currentPage.
