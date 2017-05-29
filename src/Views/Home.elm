@@ -9,27 +9,29 @@ import Data.Msg exposing (Msg(FilterTag, FilterPage))
 import Data.User exposing (User)
 
 
-paginationItem : Int -> Html Msg
-paginationItem page =
-    li [ class "page-item" ]
+paginationItem : Int -> Int -> Html Msg
+paginationItem selectedPage page =
+    li [ class (if (selectedPage + 1) == page then
+                    "page-item active"
+                else "page-item") ]
         -- TODO : Add class "active" to the current page
-        [ a [ class "page-link", href "", onNoBubbleClick (FilterPage page) ]
+        [ a [ class "page-link", href "", onNoBubbleClick (FilterPage (page - 1)) ]
             [ text (toString page) ]
         ]
 
 
-pagination : Int -> Html Msg
-pagination l =
+pagination : Int -> Int -> Html Msg
+pagination page l =
     nav []
         [ ul [ class "pagination" ]
             (List.range 1 l
-                |> List.map paginationItem
+                |> List.map (\x -> paginationItem page x)
             )
         ]
 
 
-home : Maybe User -> Articles -> Maybe String -> List String -> Html Msg
-home user articles selectedTag tags =
+home : Maybe User -> Articles -> Int -> Maybe String -> List String -> Html Msg
+home user articles page selectedTag tags =
     div [ class "home-page" ]
         [ div [ class "banner" ]
             [ div [ class "container" ]
@@ -77,7 +79,7 @@ home user articles selectedTag tags =
                         ]
                     , List.concat
                         [ List.map articlePreview articles.articles
-                        , [ pagination (articles.articlesCount // 20) ]
+                        , [ pagination page (articles.articlesCount // 20) ]
                         ]
                         -- TODO : Can paginations be changed?
                         |> div []

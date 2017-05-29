@@ -41,7 +41,7 @@ type alias Model =
     , profileFavArticles : List Article
     , profileView : ProfileArticleView
     , selectedTag : Maybe String
-    , selectedPage : Maybe Int
+    , selectedPage : Int
     }
 
 
@@ -58,7 +58,7 @@ model =
     , profileFavArticles = []
     , profileView = MyArticles
     , selectedTag = Nothing
-    , selectedPage = Nothing
+    , selectedPage = 0
     }
 
 
@@ -102,7 +102,7 @@ update msg model =
                 -- getFilteredArticlesByTag
                 ( { model | selectedTag = Just s }, Http.send HomeReq (getFilteredArticlesByTag s) )
         FilterPage s ->
-            ( { model | selectedPage = Just s }, Http.send HomeReq (getFilteredArticlesByPage s) )
+            ( { model | selectedPage = s }, Http.send HomeReq (getFilteredArticlesByPage s) )
 
         ProfileFavArticles u ->
             ( { model | profileView = FavoritedArticles }, Http.send ProfileArticlesReq (getUsersFavoriteArticles u) )
@@ -172,11 +172,11 @@ view model =
         Home ->
             case model.mainPageData of
                 Just articles ->
-                    layout model.user model.route (home model.user articles model.selectedTag model.tags)
+                    layout model.user model.route (home model.user articles model.selectedPage model.selectedTag model.tags)
 
                 Nothing ->
                     -- TODO display an error?
-                    layout model.user model.route (home model.user { articles = [], articlesCount = 0 } model.selectedTag [])
+                    layout model.user model.route (home model.user { articles = [], articlesCount = 0 } model.selectedPage model.selectedTag [])
 
         Settings ->
             layout model.user model.route settings
@@ -206,7 +206,7 @@ view model =
 
                 Nothing ->
                     -- TODO display an error?
-                    layout model.user model.route (home model.user { articles = [], articlesCount = 0 } model.selectedTag [])
+                    layout model.user model.route (home model.user { articles = [], articlesCount = 0 } model.selectedPage model.selectedTag [])
 
         NotFoundRoute ->
             layout model.user model.route (div [] [ text "NotFound" ])
