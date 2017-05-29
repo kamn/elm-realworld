@@ -100,7 +100,7 @@ update msg model =
         FilterTag s ->
             log s
                 -- getFilteredArticlesByTag
-                ( { model | selectedTag = Just s }, Http.send HomeReq (getFilteredArticlesByTag s) )
+                ( { model | selectedTag = Just s, selectedPage = 0 }, Http.send HomeReq (getFilteredArticlesByTag s) )
         FilterPage s ->
             ( { model | selectedPage = s }, Http.send HomeReq (getFilteredArticlesByPage s) )
 
@@ -112,6 +112,7 @@ update msg model =
             parseUrlChange model (parseLocation loc)
 
         HomeReq (Ok data) ->
+            -- Is there a potential bug here? I route calls to this but sometimes I might need to set data to selectedPage 0?
             ( { model | mainPageData = Just data }, Cmd.none )
 
         HomeReq _ ->
