@@ -283,3 +283,9 @@ Also Sum types... Maybe a little too far...
 ## May 27 2017 - 21:55 to 22:10
 Added the ability to click a page and get something else to load.
 I also need to highlight the currentPage.
+
+## May 28 2017 - 22:22 to 22:37
+Going to work on more pagniation stuff.
+I think there will always be pagniation on very call.
+That way pages work with tags.
+I will have to do more work with this
