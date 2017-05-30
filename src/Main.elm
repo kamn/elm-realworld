@@ -66,7 +66,7 @@ parseUrlChange : Model -> Route -> ( Model, Cmd Msg )
 parseUrlChange model newRoute =
     case newRoute of
         Home ->
-            ( { model | route = newRoute, selectedPage = 0 }
+            ( { model | route = newRoute, selectedPage = 0 , selectedTag = Nothing}
             , Cmd.batch
                 [ Http.send HomeReq getArticles
                 , Http.send TagsReq getTags

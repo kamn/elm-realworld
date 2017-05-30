@@ -29,6 +29,11 @@ pagination page l =
             )
         ]
 
+globalFeedClass : Maybe String -> String
+globalFeedClass selectedTag =
+    case selectedTag of
+    Just s -> "nav-link"
+    Nothing -> "nav-link active"
 
 home : Maybe User -> Articles -> Int -> Maybe String -> List String -> Html Msg
 home user articles page selectedTag tags =
@@ -57,17 +62,17 @@ home user articles page selectedTag tags =
                                             [ ( "display", "none" ) ]
                                     )
                                 ]
-                                [ a [ class "nav-link disabled", href "" ]
+                                [ a [ class "nav-link disabled", href "#" ]
                                     [ text "Your Feed" ]
                                 ]
                             , li [ class "nav-item" ]
-                                [ a [ class "nav-link active", href "" ]
+                                [ a [ class (globalFeedClass selectedTag), href "#" ]
                                     [ text "Global Feed" ]
                                 ]
                             , case selectedTag of
                                 Just stag ->
                                     li [ class "nav-item" ]
-                                        [ a [ class "nav-link", href "" ]
+                                        [ a [ class "nav-link active" ] -- TODO : Should this be clickable?
                                             [ i [ class "ion-pound" ] []
                                             , text (" " ++ stag)
                                             ]
