@@ -289,3 +289,22 @@ Going to work on more pagniation stuff.
 I think there will always be pagniation on very call.
 That way pages work with tags.
 I will have to do more work with this
+
+## May 29 2017 - 20:42 to 20:56
+Working on getting the paging correct.
+Mostly correct I think but not certain.
+I guess the next step is Sign in and sign up.
+Actually I should fix some issues with a reload being forced.
+And highlighting the tag tab when one is selected.
+
+## May 29 2017 - 20:56 to 21:11
+Got the tag tab highlighting correctly.
+Reviewed the doc for how to log in.
+I am just going to store in the elm data structure for now.
+I am also going to have to add quth token to the request.
+
+Looking at the sourcecode for elm-http
+https://github.com/elm-lang/http/blob/master/src/Http.elm#L159
+I will have to implement my own version to get the correct authentication headers.
+
+Added a basic authedGet and will add more in the future.
