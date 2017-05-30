@@ -66,7 +66,7 @@ parseUrlChange : Model -> Route -> ( Model, Cmd Msg )
 parseUrlChange model newRoute =
     case newRoute of
         Home ->
-            ( { model | route = newRoute }
+            ( { model | route = newRoute, selectedPage = 0 }
             , Cmd.batch
                 [ Http.send HomeReq getArticles
                 , Http.send TagsReq getTags
@@ -98,11 +98,17 @@ update msg model =
     case msg of
         -- CLIENT INTERACTIONS
         FilterTag s ->
-            log s
-                -- getFilteredArticlesByTag
-                ( { model | selectedTag = Just s, selectedPage = 0 }, Http.send HomeReq (getFilteredArticlesByTag s) )
-        FilterPage s ->
-            ( { model | selectedPage = s }, Http.send HomeReq (getFilteredArticlesByPage s) )
+            -- getFilteredArticlesByTag
+            if model.selectedTag == Just s then
+                ( { model | selectedTag = Just s, selectedPage = 0 }, Http.send HomeReq (getFilteredArticlesByTag s model.selectedPage) )
+            else
+                ( { model | selectedTag = Just s, selectedPage = 0 }, Http.send HomeReq (getFilteredArticlesByTag s 0) )
+        FilterPage p ->
+            case model.selectedTag of
+            Just s ->
+                ( { model | selectedPage = p }, Http.send HomeReq (getFilteredArticlesByTag s p) )
+            Nothing ->
+                ( { model | selectedPage = p }, Http.send HomeReq (getFilteredArticlesByPage p) )
 
         ProfileFavArticles u ->
             ( { model | profileView = FavoritedArticles }, Http.send ProfileArticlesReq (getUsersFavoriteArticles u) )

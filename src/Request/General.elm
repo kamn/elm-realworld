@@ -113,9 +113,9 @@ getArticles =
     Http.get (baseUrl ++ articlesApi) decodeArticles
 
 
-getFilteredArticlesByTag : String -> Http.Request Articles
-getFilteredArticlesByTag tag =
-    Http.get (baseUrl ++ articlesApi ++ "?tag=" ++ tag) decodeArticles
+getFilteredArticlesByTag : String -> Int -> Http.Request Articles
+getFilteredArticlesByTag tag pageNum =
+    Http.get (baseUrl ++ articlesApi ++ "?tag=" ++ tag ++ "&offset=" ++ (toString (pageNum * 20))) decodeArticles
 
 getFilteredArticlesByPage : Int -> Http.Request Articles
 getFilteredArticlesByPage pageNum =
