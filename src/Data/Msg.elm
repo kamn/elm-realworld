@@ -14,6 +14,8 @@ type Msg
     = FilterTag String
     | FilterPage Int
     | ProfileFavArticles String
+    | LoginName String
+    | LoginPassword String
     | UrlChange Navigation.Location
     | HomeReq (Result Http.Error Articles)
     | ArticleReq (Result Http.Error ArticleContainer)
@@ -21,3 +23,4 @@ type Msg
     | TagsReq (Result Http.Error TagsContainer)
     | ProfileReq (Result Http.Error ProfileContainer)
     | ProfileArticlesReq (Result Http.Error Articles)
+    | LoginReq (Result Http.Error Articles) -- TODO : It will not really be articles but use that data for now

@@ -42,6 +42,8 @@ type alias Model =
     , profileView : ProfileArticleView
     , selectedTag : Maybe String
     , selectedPage : Int
+    , loginName : String
+    , loginPassword : String
     }
 
 
@@ -59,6 +61,8 @@ model =
     , profileView = MyArticles
     , selectedTag = Nothing
     , selectedPage = 0
+    , loginName = ""
+    , loginPassword = ""
     }
 
 
@@ -112,7 +116,10 @@ update msg model =
 
         ProfileFavArticles u ->
             ( { model | profileView = FavoritedArticles }, Http.send ProfileArticlesReq (getUsersFavoriteArticles u) )
-
+        LoginName name ->
+            ( {model | loginName = (log "new login name" name)}, Cmd.none )
+        LoginPassword password ->
+            ( {model | loginPassword = (log "new login password" password)}, Cmd.none )
         -- DATA REQUEST
         UrlChange loc ->
             parseUrlChange model (parseLocation loc)
@@ -170,6 +177,10 @@ update msg model =
                 ( { model | profileArticles = data.articles }, Cmd.none )
 
         ProfileArticlesReq _ ->
+            ( model, Cmd.none )
+        LoginReq (Ok data) ->
+            ( model, Cmd.none )
+        LoginReq _ ->
             ( model, Cmd.none )
 
 

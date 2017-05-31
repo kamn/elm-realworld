@@ -8,3 +8,11 @@ type alias User =
     , bio : String
     , image : Maybe String
     }
+
+type alias UserCred =
+    { email : String
+    , password : String
+    }
+
+type alias LoginUserRequest =
+    { user : UserCred }

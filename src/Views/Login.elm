@@ -1,8 +1,9 @@
 module Views.Login exposing (..)
 
 import Html exposing (..)
+import Html.Events exposing (onInput)
 import Html.Attributes exposing (..)
-import Data.Msg exposing (Msg)
+import Data.Msg exposing (Msg(..))
 
 
 login : Html Msg
@@ -19,11 +20,11 @@ login =
                         ]
                     , Html.form []
                         [ fieldset [ class "form-group" ]
-                            [ input [ class "form-control form-control-lg", placeholder "Email", type_ "text" ]
+                            [ input [ class "form-control form-control-lg", placeholder "Email", type_ "text", onInput LoginName]
                                 []
                             ]
                         , fieldset [ class "form-group" ]
-                            [ input [ class "form-control form-control-lg", placeholder "Password", type_ "password" ]
+                            [ input [ class "form-control form-control-lg", placeholder "Password", type_ "password", onInput LoginPassword ]
                                 []
                             ]
                         , button [ class "btn btn-lg btn-primary pull-xs-right" ]
