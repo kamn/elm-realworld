@@ -290,7 +290,7 @@ I think there will always be pagniation on very call.
 That way pages work with tags.
 I will have to do more work with this
 
-## May 29 2017 - 20:42 to 20:56
+## May 29 2017 - 20:42 to 20:57
 Working on getting the paging correct.
 Mostly correct I think but not certain.
 I guess the next step is Sign in and sign up.
@@ -308,3 +308,9 @@ https://github.com/elm-lang/http/blob/master/src/Http.elm#L159
 I will have to implement my own version to get the correct authentication headers.
 
 Added a basic authedGet and will add more in the future.
+
+## May 30 2017 - 20:42 to 20:57
+Continue to look into how to do the post and request
+https://guide.elm-lang.org/architecture/user_input/forms.html
+
+Got some new data in the model and new events that will be useful for login
