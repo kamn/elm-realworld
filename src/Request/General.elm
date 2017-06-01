@@ -3,10 +3,12 @@ module Request.General exposing (..)
 import Http
 import Json.Decode exposing (int, string, list, bool, nullable, Decoder)
 import Json.Decode.Pipeline exposing (decode, required)
+import Json.Encode as Encode
+
 import Data.Comment exposing (Comment, ArticleComments)
 import Data.Article exposing (Articles, TagsContainer, ArticleContainer, Article)
 import Data.Profile exposing (ProfileArticleView(..), ProfileContainer, Profile)
-
+import Data.User exposing(..)
 
 baseUrl : String
 baseUrl =
@@ -92,6 +94,17 @@ decodeTagContainer =
     decode TagsContainer
         |> required "tags" (list string)
 
+
+encodeUserCred : UserCred -> Encode.Value
+encodeUserCred model =
+    Encode.object
+        [ ("email", Encode.string model.email)
+        , ("password", Encode.string model.password)]
+
+loginEncoder : LoginUserRequest -> Encode.Value
+loginEncoder model =
+    Encode.object
+        [("user", encodeUserCred model.user)]
 
 getTags : Http.Request TagsContainer
 getTags =

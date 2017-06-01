@@ -1,4 +1,4 @@
-module Data.User exposing (User)
+module Data.User exposing (User, UserCred, LoginUserRequest)
 
 
 type alias User =

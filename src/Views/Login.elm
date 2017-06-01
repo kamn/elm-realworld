@@ -1,10 +1,11 @@
 module Views.Login exposing (..)
 
 import Html exposing (..)
-import Html.Events exposing (onInput)
+import Html.Events exposing (onInput, onClick)
 import Html.Attributes exposing (..)
 import Data.Msg exposing (Msg(..))
 
+import Utils exposing(onNoBubbleClick)
 
 login : Html Msg
 login =
@@ -27,8 +28,8 @@ login =
                             [ input [ class "form-control form-control-lg", placeholder "Password", type_ "password", onInput LoginPassword ]
                                 []
                             ]
-                        , button [ class "btn btn-lg btn-primary pull-xs-right" ]
-                            [ text "Sign in          " ]
+                        , button [ class "btn btn-lg btn-primary pull-xs-right", onNoBubbleClick LoginPress ]
+                            [ text "Sign in " ]
                         ]
                     ]
                 ]

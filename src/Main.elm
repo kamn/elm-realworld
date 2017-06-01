@@ -120,6 +120,8 @@ update msg model =
             ( {model | loginName = (log "new login name" name)}, Cmd.none )
         LoginPassword password ->
             ( {model | loginPassword = (log "new login password" password)}, Cmd.none )
+        LoginPress ->
+            ( model, Cmd.none )
         -- DATA REQUEST
         UrlChange loc ->
             parseUrlChange model (parseLocation loc)

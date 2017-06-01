@@ -16,6 +16,7 @@ type Msg
     | ProfileFavArticles String
     | LoginName String
     | LoginPassword String
+    | LoginPress
     | UrlChange Navigation.Location
     | HomeReq (Result Http.Error Articles)
     | ArticleReq (Result Http.Error ArticleContainer)
