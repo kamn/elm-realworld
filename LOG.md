@@ -314,3 +314,11 @@ Continue to look into how to do the post and request
 https://guide.elm-lang.org/architecture/user_input/forms.html
 
 Got some new data in the model and new events that will be useful for login
+
+## May 31 2017 - 20:32 to 10:47
+Looking more into saving to the backend.
+
+https://github.com/mpizenberg/elm_api_test/blob/master/src/Main.elm
+
+It seems like the data needs to be encoded like it was decoded going back to the server.
+Should split the encoders and decoders into modules.
