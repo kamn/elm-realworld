@@ -290,14 +290,14 @@ I think there will always be pagniation on very call.
 That way pages work with tags.
 I will have to do more work with this
 
-## May 29 2017 - 20:42 to 20:57
+## May 29 2017 - 22:42 to 22:57
 Working on getting the paging correct.
 Mostly correct I think but not certain.
 I guess the next step is Sign in and sign up.
 Actually I should fix some issues with a reload being forced.
 And highlighting the tag tab when one is selected.
 
-## May 29 2017 - 20:56 to 21:11
+## May 29 2017 - 22:56 to 22:11
 Got the tag tab highlighting correctly.
 Reviewed the doc for how to log in.
 I am just going to store in the elm data structure for now.
@@ -309,16 +309,19 @@ I will have to implement my own version to get the correct authentication header
 
 Added a basic authedGet and will add more in the future.
 
-## May 30 2017 - 20:42 to 20:57
+## May 30 2017 - 22:42 to 22:57
 Continue to look into how to do the post and request
 https://guide.elm-lang.org/architecture/user_input/forms.html
 
 Got some new data in the model and new events that will be useful for login
 
-## May 31 2017 - 20:32 to 10:47
+## May 31 2017 - 22:32 to 22:47
 Looking more into saving to the backend.
 
 https://github.com/mpizenberg/elm_api_test/blob/master/src/Main.elm
 
 It seems like the data needs to be encoded like it was decoded going back to the server.
 Should split the encoders and decoders into modules.
+
+## June 1 2017 - 21:22 to 21:37
+Worked on modifications for posting data.
