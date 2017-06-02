@@ -95,14 +95,29 @@ decodeTagContainer =
         |> required "tags" (list string)
 
 
+decodeUser : Decoder User
+decodeUser =
+    decode Data.User.User
+        |> required "email" string
+        |> required "token" string
+        |> required "username" string
+        |> required "bio" string
+        |> required "image" (nullable string)
+
+
+decodeUserContainer : Decoder LoginUserResponse
+decodeUserContainer =
+    decode LoginUserResponse
+        |> required "user" decodeUser
+
 encodeUserCred : UserCred -> Encode.Value
 encodeUserCred model =
     Encode.object
         [ ("email", Encode.string model.email)
         , ("password", Encode.string model.password)]
 
-loginEncoder : LoginUserRequest -> Encode.Value
-loginEncoder model =
+encodeLogin : LoginUserRequest -> Encode.Value
+encodeLogin model =
     Encode.object
         [("user", encodeUserCred model.user)]
 
@@ -147,3 +162,7 @@ getUsersArticles username =
 getUsersFavoriteArticles : String -> Http.Request Articles
 getUsersFavoriteArticles username =
     Http.get (baseUrl ++ articlesApi ++ "?favorited=" ++ username) decodeArticles
+
+postLogin : LoginUserRequest -> Http.Request Articles
+postLogin loginData =
+    Http.post  (baseUrl ++ "/users/" ++ "login") (Http.jsonBody (encodeLogin loginData)) decodeArticles

@@ -1,4 +1,4 @@
-module Data.User exposing (User, UserCred, LoginUserRequest)
+module Data.User exposing (User, UserCred, LoginUserRequest, LoginUserResponse)
 
 
 type alias User =
@@ -16,3 +16,6 @@ type alias UserCred =
 
 type alias LoginUserRequest =
     { user : UserCred }
+
+type alias LoginUserResponse =
+    { user : User}
