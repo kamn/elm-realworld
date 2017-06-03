@@ -17,6 +17,7 @@ type Msg
     | LoginName String
     | LoginPassword String
     | LoginPress
+    | LogoutPress
     | UrlChange Navigation.Location
     | HomeReq (Result Http.Error Articles)
     | ArticleReq (Result Http.Error ArticleContainer)

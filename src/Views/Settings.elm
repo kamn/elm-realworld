@@ -1,8 +1,9 @@
 module Views.Settings exposing (..)
 
 import Html exposing (..)
+import Html.Events exposing (onClick)
 import Html.Attributes exposing (..)
-import Data.Msg exposing (Msg)
+import Data.Msg exposing (Msg(..))
 
 
 settings : Html Msg
@@ -39,6 +40,9 @@ settings =
                                 [ text "Update Settings              " ]
                             ]
                         ]
+                    , hr [] []
+                    , button [class "btn btn-outline-danger", onClick LogoutPress]
+                        [text "Or click here to logout."]
                     ]
                 ]
             ]

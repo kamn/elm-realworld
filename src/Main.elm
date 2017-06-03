@@ -122,6 +122,8 @@ update msg model =
             ( {model | loginPassword = (log "new login password" password)}, Cmd.none )
         LoginPress ->
             ( model, Http.send LoginReq (postLogin {user = {email = model.loginName, password = model.loginPassword}}) )
+        LogoutPress ->
+            ( {model | user = Nothing} , Navigation.newUrl "#")
         -- DATA REQUEST
         UrlChange loc ->
             parseUrlChange model (parseLocation loc)
