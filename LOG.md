@@ -325,3 +325,19 @@ Should split the encoders and decoders into modules.
 
 ## June 1 2017 - 21:22 to 21:37
 Worked on modifications for posting data.
+
+## June 2 2017 - 22:03 to 22:18
+Worked on login and got a repsonse back!
+I still need to figure out how to redirect after...
+
+## June 2 2017 - 22:20 to 22:35
+Ok I am getting an error for some reason on the user login...
+It is because my bio is null.
+
+Fixed that and now I am in!
+Awesome! There will be a bit of work but I think one of my first things will be to log back out.
+
+Got log out working.
+I can already tell it will be annoying login in and out.
+I might have to look at the elm implementation to see how it does the ports.
+I would rather learn on my own though.
