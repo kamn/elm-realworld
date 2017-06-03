@@ -101,7 +101,7 @@ decodeUser =
         |> required "email" string
         |> required "token" string
         |> required "username" string
-        |> required "bio" string
+        |> required "bio" (nullable string)
         |> required "image" (nullable string)
 
 

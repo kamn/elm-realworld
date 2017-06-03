@@ -181,9 +181,9 @@ update msg model =
         ProfileArticlesReq _ ->
             ( model, Cmd.none )
         LoginReq (Ok data) ->
-            log "data" ({model | user = Just data.user},  Cmd.none )
-        LoginReq _ ->
-            ( model, Cmd.none )
+            log "Login" ({model | user = Just data.user},  Navigation.newUrl "#" )
+        LoginReq v ->
+            log (toString v) ( model, Cmd.none )
 
 
 view : Model -> Html Msg

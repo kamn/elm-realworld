@@ -5,7 +5,7 @@ type alias User =
     { email : String
     , token : String
     , username : String
-    , bio : String
+    , bio : Maybe String
     , image : Maybe String
     }
 

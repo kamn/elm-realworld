@@ -81,8 +81,8 @@ getLinkClasses navLinks route =
             "nav-link"
 
 
-getLoggedInNav : Route -> List (Html Msg)
-getLoggedInNav route =
+getLoggedInNav : User -> Route -> List (Html Msg)
+getLoggedInNav user route =
     [ li [ class "nav-item" ]
         [ a [ class (getLinkClasses Home route), href "#/" ]
             [ text "Home" ]
@@ -91,19 +91,19 @@ getLoggedInNav route =
         [ a [ class (getLinkClasses NewPost route), href "#/editor" ]
             [ i [ class "ion-compose" ]
                 []
-            , text " New Post            "
+            , text " New Post"
             ]
         ]
     , li [ class "nav-item" ]
         [ a [ class (getLinkClasses Settings route), href "#/settings" ]
             [ i [ class "ion-gear-a" ]
                 []
-            , text " Settings            "
+            , text " Settings"
             ]
         ]
     , li [ class "nav-item" ]
-        [ a [ class (getLinkClasses SignUp route), href "#/register" ]
-            [ text "Sign up" ]
+        [ a [ class (getLinkClasses SignUp route), href ("#/profile/" ++ user.username)]
+            [ text user.username ]
         ]
     ]
 
@@ -149,8 +149,8 @@ layout maybeUser route container =
                     [ text "conduit" ]
                 , ul [ class "nav navbar-nav pull-xs-right" ]
                     (case maybeUser of
-                        Just _ ->
-                            getLoggedInNav route
+                        Just user ->
+                            getLoggedInNav user route
 
                         Nothing ->
                             getNotLoggedInNav route
