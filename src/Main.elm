@@ -18,7 +18,7 @@ import Views.Profile exposing (profile)
 import Views.Editor exposing (editor)
 import Views.Article exposing (article)
 import Data.Article exposing (Articles, Article)
-import Data.User exposing (User)
+import Data.User exposing (User, LoginUserRequest)
 import Data.Profile exposing (Profile, ProfileArticleView(..))
 import Data.Comment exposing (..)
 import Data.Msg exposing (Msg(..))
@@ -121,7 +121,7 @@ update msg model =
         LoginPassword password ->
             ( {model | loginPassword = (log "new login password" password)}, Cmd.none )
         LoginPress ->
-            ( model, Cmd.none )
+            ( model, Http.send LoginReq (postLogin {user = {email = model.loginName, password = model.loginPassword}}) )
         -- DATA REQUEST
         UrlChange loc ->
             parseUrlChange model (parseLocation loc)
@@ -181,7 +181,7 @@ update msg model =
         ProfileArticlesReq _ ->
             ( model, Cmd.none )
         LoginReq (Ok data) ->
-            ( model, Cmd.none )
+            log "data" ({model | user = Just data.user},  Cmd.none )
         LoginReq _ ->
             ( model, Cmd.none )
 

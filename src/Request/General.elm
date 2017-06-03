@@ -163,6 +163,6 @@ getUsersFavoriteArticles : String -> Http.Request Articles
 getUsersFavoriteArticles username =
     Http.get (baseUrl ++ articlesApi ++ "?favorited=" ++ username) decodeArticles
 
-postLogin : LoginUserRequest -> Http.Request Articles
+postLogin : LoginUserRequest -> Http.Request LoginUserResponse
 postLogin loginData =
-    Http.post  (baseUrl ++ "/users/" ++ "login") (Http.jsonBody (encodeLogin loginData)) decodeArticles
+    Http.post  (baseUrl ++ "/users/" ++ "login") (Http.jsonBody (encodeLogin loginData)) decodeUserContainer
