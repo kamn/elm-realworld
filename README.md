@@ -8,3 +8,7 @@ This codebase was created to demonstrate a fully fledged fullstack application b
 ## Purpose
 Even though a version for this app was made, I wanted to make my own and learn more about Elm.
 I also wanted to try to track my progress with a log.
+
+## Development
+
+`elm-live --output=elm.js src/Main.elm --pushstate --open --debug`
