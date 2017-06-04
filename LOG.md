@@ -341,3 +341,8 @@ Got log out working.
 I can already tell it will be annoying login in and out.
 I might have to look at the elm implementation to see how it does the ports.
 I would rather learn on my own though.
+
+## June 3 2017 - 23:09 to 23:24
+Looking into custom html page for getting localstorage working
+Looked at the html in the elm-app :(
+Will have to not look anymore.
