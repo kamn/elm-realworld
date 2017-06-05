@@ -12,6 +12,7 @@
 			});
 
 			app.ports.doLoadSession.subscribe(function () {
+				console.log("doLoadSession!");
 				app.ports.loadSession.send(localStorage.getItem('user'));
 			});
 

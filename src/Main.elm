@@ -66,6 +66,9 @@ model =
     }
 
 
+subscriptions : Model -> Sub Msg
+subscriptions model = loadSession LoadSession
+
 parseUrlChange : Model -> Route -> ( Model, Cmd Msg )
 parseUrlChange model newRoute =
     case newRoute of
@@ -74,6 +77,7 @@ parseUrlChange model newRoute =
             , Cmd.batch
                 [ Http.send HomeReq getArticles
                 , Http.send TagsReq getTags
+                , doLoadSession ()
                 ]
             )
 
@@ -124,6 +128,16 @@ update msg model =
             ( model, Http.send LoginReq (postLogin {user = {email = model.loginName, password = model.loginPassword}}) )
         LogoutPress ->
             ( {model | user = Nothing} , Navigation.newUrl "#")
+
+        DoLoadSession ->
+            ( model , Cmd.none)
+        LoadSession ms ->
+            case ms of
+                Just s ->
+                    -- ( {model | user= Just (decodeUser s)} , Cmd.none)
+                    ( model , Cmd.none)
+                Nothing ->
+                    log "Found nothing" ( model , Cmd.none)
         -- DATA REQUEST
         UrlChange loc ->
             parseUrlChange model (parseLocation loc)
@@ -241,6 +255,7 @@ init location =
             parseLocation location
     in
         parseUrlChange model newRoute
+        -- TODO Load in user states if it is there
 
 
 main : Program Never Model Msg
@@ -249,5 +264,5 @@ main =
         { init = init
         , view = view
         , update = update
-        , subscriptions = \_ -> Sub.none
+        , subscriptions = subscriptions
         }

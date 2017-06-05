@@ -18,6 +18,9 @@ type Msg
     | LoginPassword String
     | LoginPress
     | LogoutPress
+    -- Session data
+    | DoLoadSession
+    | LoadSession (Maybe String)
     | UrlChange Navigation.Location
     | HomeReq (Result Http.Error Articles)
     | ArticleReq (Result Http.Error ArticleContainer)

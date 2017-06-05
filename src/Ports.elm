@@ -9,4 +9,4 @@ import Data.Msg exposing (Msg(..))
 -- PORTS
 port saveSession : String -> Cmd msg
 port doLoadSession: () -> Cmd msg
-port loadSession: (String -> msg) -> Sub msg
+port loadSession: (Maybe String -> msg) -> Sub msg
