@@ -346,3 +346,24 @@ I would rather learn on my own though.
 Looking into custom html page for getting localstorage working
 Looked at the html in the elm-app :(
 Will have to not look anymore.
+
+## June 4 2017 - 19:56 to 20:11
+Looking to how to use ports.
+Not a lot of progress
+
+## June 4 2017 - 20:11 to 20:26
+Got elm code calling JS code.
+I need the path back
+
+## June 4 2017 - 20:26 to 20:41
+Got very close to having localstorage done.
+Just a little but more...
+
+## June 4 2017 - 20:41 to 20:56
+Finally got it working!
+
+I am also going to clean up the issue with how I am loading css.
+Then I can start to work on actually implementing logged in functionality like liking and posting.
+
+I should also get log out working.
+I wonder how much i will need to include the token in requests
