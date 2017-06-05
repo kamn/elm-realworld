@@ -367,3 +367,14 @@ Then I can start to work on actually implementing logged in functionality like l
 
 I should also get log out working.
 I wonder how much i will need to include the token in requests
+
+## June 4 2017 - 21:01 to 21:16
+Going to read the spec some more then implement logout.
+Maybe I should not store the entire user object. Just the toke then call api/user
+
+Also I have to recall getting the articles with the token so that I can figured out if I liked an article or not...
+
+I will need to get the feed articles.
+
+I also realize that I don't have the proper html for the new post page.
+That is a low hanging fruit that can be addressed next.
