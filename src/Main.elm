@@ -5,7 +5,8 @@ import Debug exposing (log)
 import Navigation exposing (Location)
 import Http
 import Request.General exposing (..)
-
+import Json.Decode exposing (decodeString)
+import Json.Encode exposing (encode)
 
 -- Views
 
@@ -134,8 +135,11 @@ update msg model =
         LoadSession ms ->
             case ms of
                 Just s ->
-                    -- ( {model | user= Just (decodeUser s)} , Cmd.none)
-                    ( model , Cmd.none)
+                    case (decodeString decodeUser s) of
+                        (Ok data) ->
+                            ({ model | user = Just data} , Cmd.none)
+                        (_) ->
+                            ( model , Cmd.none)
                 Nothing ->
                     log "Found nothing" ( model , Cmd.none)
         -- DATA REQUEST
@@ -197,7 +201,7 @@ update msg model =
         ProfileArticlesReq _ ->
             ( model, Cmd.none )
         LoginReq (Ok data) ->
-            log "Login" ({model | user = Just data.user},  Navigation.newUrl "#" )
+            log "Login" ({model | user = Just data.user},  Cmd.batch [Navigation.newUrl "#", saveSession (encode 0 (encodeUser data.user))])
         LoginReq v ->
             log (toString v) ( model, Cmd.none )
 

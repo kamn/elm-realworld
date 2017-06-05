@@ -110,6 +110,23 @@ decodeUserContainer =
     decode LoginUserResponse
         |> required "user" decodeUser
 
+encodeUser: User -> Encode.Value
+encodeUser user =
+    Encode.object
+        [ ("email", Encode.string user.email)
+        , ("token", Encode.string user.token)
+        , ("username", Encode.string user.username)
+        , ("bio", case user.bio of
+                    Just b ->
+                        Encode.string b
+                    Nothing ->
+                        Encode.null)
+        , ("image",  case user.image of
+                    Just i ->
+                        Encode.string i
+                    Nothing ->
+                        Encode.null)]
+
 encodeUserCred : UserCred -> Encode.Value
 encodeUserCred model =
     Encode.object
