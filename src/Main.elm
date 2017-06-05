@@ -137,9 +137,9 @@ update msg model =
                 Just s ->
                     case (decodeString decodeUser s) of
                         (Ok data) ->
-                            ({ model | user = Just data} , Cmd.none)
-                        (_) ->
-                            ( model , Cmd.none)
+                            log "Loaded session" ({ model | user = Just data} , Cmd.none)
+                        (Err a) ->
+                            log a ( model , Cmd.none)
                 Nothing ->
                     log "Found nothing" ( model , Cmd.none)
         -- DATA REQUEST

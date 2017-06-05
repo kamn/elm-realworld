@@ -8,15 +8,11 @@
 			//https://stackoverflow.com/questions/33697444/data-persistence-in-elm
 			var app = Elm.Main.fullscreen();
 			app.ports.saveSession.subscribe(function (state) {
-				console.log("Saving something!");
-				console.log(state);
-				
-				//localStorage.setItem('user', JSON.stringify(state));
+				localStorage.setItem('user', JSON.stringify(state));
 			});
 
 			app.ports.doLoadSession.subscribe(function () {
-				console.log("doLoadSession!");
-				app.ports.loadSession.send(localStorage.getItem('user'));
+				app.ports.loadSession.send(JSON.parse(localStorage.getItem('user')));
 			});
 
 		</script>
