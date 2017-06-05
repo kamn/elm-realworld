@@ -128,7 +128,7 @@ update msg model =
         LoginPress ->
             ( model, Http.send LoginReq (postLogin {user = {email = model.loginName, password = model.loginPassword}}) )
         LogoutPress ->
-            ( {model | user = Nothing} , Navigation.newUrl "#")
+            ( {model | user = Nothing} , Cmd.batch [ Navigation.newUrl "#", saveSession "" ] )
 
         DoLoadSession ->
             ( model , Cmd.none)
