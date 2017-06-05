@@ -378,3 +378,13 @@ I will need to get the feed articles.
 
 I also realize that I don't have the proper html for the new post page.
 That is a low hanging fruit that can be addressed next.
+
+## June 4 2017 - 21:16 to 21:31
+Figured out why the http-to-elm does not work. There was a placeholder with a "'".
+Actually took the time to submit an issue to the repo.
+
+Noticed a bug with the session log in.
+It only works when on home page(makes sense because of how I did the code.).
+
+Going to populate data in my settings.
+
