@@ -28,8 +28,6 @@ import Ports exposing (..)
 
 import Routes exposing (..)
 
-
-
 type alias Model =
     { route : Route
     , mainPageData : Maybe Articles
@@ -156,10 +154,7 @@ update msg model =
                 ( model, Cmd.none )
 
         ArticleReq (Ok data) ->
-            log "-----------"
-                (log (toString data))
-                (log "-----------")
-                ( { model | articleData = Just data.article }, Cmd.none )
+            ( { model | articleData = Just (log "ArticleReq" data.article) }, Cmd.none )
 
         ArticleReq _ ->
             log "failed"
@@ -167,10 +162,7 @@ update msg model =
                 ( model, Cmd.none )
 
         ArticleCommentsReq (Ok data) ->
-            log "-----------"
-                (log (toString data))
-                (log "-----------")
-                ( { model | commentsData = data.comments }, Cmd.none )
+            log "ArticleCommentsReq" ( { model | commentsData = data.comments }, Cmd.none )
 
         ArticleCommentsReq _ ->
             log "failed"
@@ -184,19 +176,13 @@ update msg model =
             ( model, Cmd.none )
 
         ProfileReq (Ok data) ->
-            log "-----------"
-                (log (toString data))
-                (log "-----------")
-                ( { model | profile = Just data.profile }, Cmd.none )
+            log "ProfileReq" ( { model | profile = Just data.profile }, Cmd.none )
 
         ProfileReq _ ->
             ( model, Cmd.none )
 
         ProfileArticlesReq (Ok data) ->
-            log "-----------"
-                (log (toString data.articles))
-                (log "-----------")
-                ( { model | profileArticles = data.articles }, Cmd.none )
+            log "ProfileArticlesReq" ( { model | profileArticles = data.articles }, Cmd.none )
 
         ProfileArticlesReq _ ->
             ( model, Cmd.none )
