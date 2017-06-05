@@ -205,7 +205,11 @@ view model =
                     layout model.user model.route (home model.user { articles = [], articlesCount = 0 } model.selectedPage model.selectedTag [])
 
         Settings ->
-            layout model.user model.route settings
+            case model.user of
+                Just user ->
+                    layout model.user model.route (settings user)
+                Nothing ->
+                    layout model.user model.route (div [] [ text "NotFound" ])
 
         Login ->
             layout model.user model.route login

@@ -4,10 +4,18 @@ import Html exposing (..)
 import Html.Events exposing (onClick)
 import Html.Attributes exposing (..)
 import Data.Msg exposing (Msg(..))
+import Data.User exposing (User)
 
+getUserBio: Maybe String -> String
+getUserBio maybeBio =
+    case maybeBio of
+        Just bio ->
+            bio
+        Nothing ->
+            ""
 
-settings : Html Msg
-settings =
+settings : User -> Html Msg
+settings user =
     div [ class "settings-page" ]
         [ div [ class "container page" ]
             [ div [ class "row" ]
@@ -21,19 +29,19 @@ settings =
                                     []
                                 ]
                             , fieldset [ class "form-group" ]
-                                [ input [ class "form-control form-control-lg", placeholder "Your Name", type_ "text" ]
+                                [ input [ class "form-control form-control-lg", placeholder "Username", type_ "text", value user.username ]
                                     []
                                 ]
                             , fieldset [ class "form-group" ]
-                                [ textarea [ class "form-control form-control-lg", placeholder "Short bio about you", attribute "rows" "8" ]
+                                [ textarea [ class "form-control form-control-lg", placeholder "Short bio about you", attribute "rows" "8", value (getUserBio user.bio) ]
                                     []
                                 ]
                             , fieldset [ class "form-group" ]
-                                [ input [ class "form-control form-control-lg", placeholder "Email", type_ "text" ]
-                                    []
+                                [ input [ class "form-control form-control-lg", placeholder "Email", type_ "text", value user.email]
+                                        []
                                 ]
                             , fieldset [ class "form-group" ]
-                                [ input [ class "form-control form-control-lg", placeholder "Password", type_ "password" ]
+                                [ input [ class "form-control form-control-lg", placeholder "New Password", type_ "password" ]
                                     []
                                 ]
                             , button [ class "btn btn-lg btn-primary pull-xs-right" ]
