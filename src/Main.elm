@@ -22,11 +22,11 @@ import Data.User exposing (User, LoginUserRequest)
 import Data.Profile exposing (Profile, ProfileArticleView(..))
 import Data.Comment exposing (..)
 import Data.Msg exposing (Msg(..))
-
-
+import Ports exposing (..)
 -- ROUTING
 
 import Routes exposing (..)
+
 
 
 type alias Model =
