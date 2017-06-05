@@ -6,26 +6,6 @@ import Data.Msg exposing (Msg)
 import Data.User exposing (User)
 import Routes exposing (Route(..))
 
-
-stylesheet : String -> Html Msg
-stylesheet url =
-    let
-        tag =
-            "link"
-
-        attrs =
-            [ attribute "rel" "stylesheet"
-            , attribute "property" "stylesheet"
-            , type_ "text/css"
-            , attribute "href" url
-            ]
-
-        children =
-            []
-    in
-        node tag attrs children
-
-
 type NavbarLinks
     = Home
     | NewPost
