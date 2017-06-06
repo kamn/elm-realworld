@@ -15,6 +15,7 @@ type Msg
     | FilterPage Int
     | ProfileFavArticles String
     | YourFeedClick
+    | HomeFeedClick
     | LoginName String
     | LoginPassword String
     | LoginPress

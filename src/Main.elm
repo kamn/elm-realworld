@@ -125,9 +125,11 @@ update msg model =
         YourFeedClick ->
             case model.user of
                 Just user ->
-                    ( { model | selectedPage = 0, feed = True }, Http.send HomeReq (getFilteredArticlesByPage (Just user.token) model.feed 0) )
+                    ( { model | selectedPage = 0, feed = True }, Http.send HomeReq (getFilteredArticlesByPage (Just user.token) True 0) )
                 Nothing ->
-                    ( { model | selectedPage = 0, feed = True }, Http.send HomeReq (getFilteredArticlesByPage Nothing model.feed 0) )
+                    ( { model | selectedPage = 0, feed = True }, Http.send HomeReq (getFilteredArticlesByPage Nothing False 0) )
+        HomeFeedClick ->
+            ( { model | selectedPage = 0, feed = False }, Http.send HomeReq (getFilteredArticlesByPage Nothing False 0) )
         ProfileFavArticles u ->
             ( { model | profileView = FavoritedArticles }, Http.send ProfileArticlesReq (getUsersFavoriteArticles u) )
         LoginName name ->
@@ -209,11 +211,11 @@ view model =
         Home ->
             case model.mainPageData of
                 Just articles ->
-                    layout model.user model.route (home model.user articles model.selectedPage model.selectedTag model.tags)
+                    layout model.user model.route (home model.user articles model.selectedPage model.feed model.selectedTag model.tags)
 
                 Nothing ->
                     -- TODO display an error?
-                    layout model.user model.route (home model.user { articles = [], articlesCount = 0 } model.selectedPage model.selectedTag [])
+                    layout model.user model.route (home model.user { articles = [], articlesCount = 0 } model.selectedPage model.feed model.selectedTag [])
 
         Settings ->
             case model.user of
@@ -247,7 +249,7 @@ view model =
 
                 Nothing ->
                     -- TODO display an error?
-                    layout model.user model.route (home model.user { articles = [], articlesCount = 0 } model.selectedPage model.selectedTag [])
+                    layout model.user model.route (home model.user { articles = [], articlesCount = 0 } model.selectedPage model.feed model.selectedTag [])
 
         NotFoundRoute ->
             layout model.user model.route (div [] [ text "NotFound" ])

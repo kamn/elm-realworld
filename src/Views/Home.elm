@@ -30,14 +30,25 @@ pagination page l =
             )
         ]
 
-globalFeedClass : Maybe String -> String
-globalFeedClass selectedTag =
-    case selectedTag of
-    Just s -> "nav-link"
-    Nothing -> "nav-link active"
+globalFeedClass : Bool -> Maybe String -> String
+globalFeedClass feed selectedTag =
+    if feed then
+         "nav-link"
+    else
+        case selectedTag of
+            Just s -> "nav-link"
+            Nothing -> "nav-link active"
 
-home : Maybe User -> Articles -> Int -> Maybe String -> List String -> Html Msg
-home user articles page selectedTag tags =
+myFeedClass : Bool -> String
+myFeedClass feed =
+    if feed then
+        "nav-link active"
+    else
+        "nav-link"
+
+
+home : Maybe User -> Articles -> Int -> Bool -> Maybe String -> List String -> Html Msg
+home user articles page feed selectedTag tags =
     div [ class "home-page" ]
         [ div [ class "banner" ]
             [ div [ class "container" ]
@@ -63,11 +74,11 @@ home user articles page selectedTag tags =
                                             [ ( "display", "none" ) ]
                                     )
                                 ]
-                                [ a [ class "nav-link", href "#", onNoBubbleClick Data.Msg.YourFeedClick]
+                                [ a [ class (myFeedClass feed), href "#", onNoBubbleClick Data.Msg.YourFeedClick]
                                     [ text "Your Feed" ]
                                 ]
                             , li [ class "nav-item" ]
-                                [ a [ class (globalFeedClass selectedTag), href "#" ]
+                                [ a [ class (globalFeedClass feed selectedTag), href "#", onNoBubbleClick Data.Msg.HomeFeedClick ]
                                     [ text "Global Feed" ]
                                 ]
                             , case selectedTag of
@@ -84,7 +95,7 @@ home user articles page selectedTag tags =
                             ]
                         ]
                     , if (List.length articles.articles) == 0 then
-                        div [] [text "Nothing here"]
+                        div [ class "article-preview" ] [ text "No articles are here... yet." ]
                       else
                         List.concat
                             [ List.map articlePreview articles.articles
