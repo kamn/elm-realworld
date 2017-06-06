@@ -388,3 +388,9 @@ It only works when on home page(makes sense because of how I did the code.).
 
 Going to populate data in my settings.
 
+## June 5 2017 - 20:03 to 20:18
+Started the work on getting the correct feed data
+
+## June 5 2017 - 20:18 to 20:33
+I can now get the feed(even though there is nothing in it)
+I have to add an additional way of tracking the model and knowing what to highlight
