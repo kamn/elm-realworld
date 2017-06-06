@@ -1,6 +1,7 @@
 module Views.Home exposing (..)
 
 import Html exposing (..)
+import Html.Events exposing (onClick)
 import Html.Attributes exposing (..)
 import Views.Article exposing (articlePreview)
 import Utils exposing (..)
@@ -62,7 +63,7 @@ home user articles page selectedTag tags =
                                             [ ( "display", "none" ) ]
                                     )
                                 ]
-                                [ a [ class "nav-link disabled", href "#" ]
+                                [ a [ class "nav-link", href "#", onClick Data.Msg.YourFeedClick]
                                     [ text "Your Feed" ]
                                 ]
                             , li [ class "nav-item" ]

@@ -43,6 +43,7 @@ type alias Model =
     , selectedPage : Int
     , loginName : String
     , loginPassword : String
+    , feed : Bool
     }
 
 
@@ -62,6 +63,7 @@ model =
     , selectedPage = 0
     , loginName = ""
     , loginPassword = ""
+    , feed = False
     }
 
 
@@ -115,8 +117,9 @@ update msg model =
             Just s ->
                 ( { model | selectedPage = p }, Http.send HomeReq (getFilteredArticlesByTag s p) )
             Nothing ->
-                ( { model | selectedPage = p }, Http.send HomeReq (getFilteredArticlesByPage p) )
-
+                ( { model | selectedPage = p }, Http.send HomeReq (getFilteredArticlesByPage model.feed p) )
+        YourFeedClick ->
+           ( { model | selectedPage = 0, feed = True }, Http.send HomeReq (getFilteredArticlesByPage model.feed 0) )
         ProfileFavArticles u ->
             ( { model | profileView = FavoritedArticles }, Http.send ProfileArticlesReq (getUsersFavoriteArticles u) )
         LoginName name ->

@@ -19,6 +19,9 @@ articlesApi : String
 articlesApi =
     "/articles"
 
+feedApi : String
+feedApi =
+    "/feed"
 
 tagsApi : String
 tagsApi =
@@ -158,13 +161,20 @@ getArticles =
     Http.get (baseUrl ++ articlesApi) decodeArticles
 
 
+getYourFeed: String -> Http.Request Articles
+getYourFeed token =
+    Http.get (baseUrl ++ articlesApi) decodeArticles
+
 getFilteredArticlesByTag : String -> Int -> Http.Request Articles
 getFilteredArticlesByTag tag pageNum =
     Http.get (baseUrl ++ articlesApi ++ "?tag=" ++ tag ++ "&offset=" ++ (toString (pageNum * 20))) decodeArticles
 
-getFilteredArticlesByPage : Int -> Http.Request Articles
-getFilteredArticlesByPage pageNum =
-    Http.get (baseUrl ++ articlesApi ++ "?offset=" ++ (toString (pageNum * 20))) decodeArticles
+getFilteredArticlesByPage : Bool -> Int -> Http.Request Articles
+getFilteredArticlesByPage feed pageNum =
+    if feed then
+        Http.get (baseUrl ++ articlesApi ++ "/feed" ++ "?offset=" ++ (toString (pageNum * 20))) decodeArticles
+    else
+        Http.get (baseUrl ++ articlesApi ++ "?offset=" ++ (toString (pageNum * 20))) decodeArticles
 
 getProfile : String -> Http.Request ProfileContainer
 getProfile username =
