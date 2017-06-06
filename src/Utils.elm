@@ -17,7 +17,7 @@ authedGet : String -> String -> Decode.Decoder a -> Request a
 authedGet url token decoder =
   request
     { method = "GET"
-    , headers = [Http.header "Authorization" token]
+    , headers = [Http.header "Authorization" ("Token " ++ token)]
     , url = url
     , body = emptyBody
     , expect = expectJson decoder

@@ -63,7 +63,7 @@ home user articles page selectedTag tags =
                                             [ ( "display", "none" ) ]
                                     )
                                 ]
-                                [ a [ class "nav-link", href "#", onClick Data.Msg.YourFeedClick]
+                                [ a [ class "nav-link", href "#", onNoBubbleClick Data.Msg.YourFeedClick]
                                     [ text "Your Feed" ]
                                 ]
                             , li [ class "nav-item" ]
@@ -83,12 +83,15 @@ home user articles page selectedTag tags =
                                     span [] []
                             ]
                         ]
-                    , List.concat
-                        [ List.map articlePreview articles.articles
-                        , [ pagination page (articles.articlesCount // 20) ]
-                        ]
-                        -- TODO : Can paginations be changed?
-                        |> div []
+                    , if (List.length articles.articles) == 0 then
+                        div [] [text "Nothing here"]
+                      else
+                        List.concat
+                            [ List.map articlePreview articles.articles
+                            , [ pagination page (articles.articlesCount // 20) ]
+                            ]
+                            -- TODO : Can paginations be changed?
+                            |> div []
                     ]
                 , div [ class "col-md-3" ]
                     [ div [ class "sidebar" ]

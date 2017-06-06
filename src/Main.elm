@@ -117,9 +117,17 @@ update msg model =
             Just s ->
                 ( { model | selectedPage = p }, Http.send HomeReq (getFilteredArticlesByTag s p) )
             Nothing ->
-                ( { model | selectedPage = p }, Http.send HomeReq (getFilteredArticlesByPage model.feed p) )
+                case model.user of
+                Just user ->
+                    ( { model | selectedPage = p }, Http.send HomeReq (getFilteredArticlesByPage (Just user.token) model.feed p) )
+                Nothing ->
+                    ( { model | selectedPage = p }, Http.send HomeReq (getFilteredArticlesByPage Nothing model.feed p) )
         YourFeedClick ->
-           ( { model | selectedPage = 0, feed = True }, Http.send HomeReq (getFilteredArticlesByPage model.feed 0) )
+            case model.user of
+                Just user ->
+                    ( { model | selectedPage = 0, feed = True }, Http.send HomeReq (getFilteredArticlesByPage (Just user.token) model.feed 0) )
+                Nothing ->
+                    ( { model | selectedPage = 0, feed = True }, Http.send HomeReq (getFilteredArticlesByPage Nothing model.feed 0) )
         ProfileFavArticles u ->
             ( { model | profileView = FavoritedArticles }, Http.send ProfileArticlesReq (getUsersFavoriteArticles u) )
         LoginName name ->
@@ -149,7 +157,7 @@ update msg model =
 
         HomeReq (Ok data) ->
             -- Is there a potential bug here? I route calls to this but sometimes I might need to set data to selectedPage 0?
-            ( { model | mainPageData = Just data }, Cmd.none )
+            ( { model | mainPageData = Just (log "HomeReq Result" data) }, Cmd.none )
 
         HomeReq _ ->
             log "failed"

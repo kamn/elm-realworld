@@ -10,6 +10,8 @@ import Data.Article exposing (Articles, TagsContainer, ArticleContainer, Article
 import Data.Profile exposing (ProfileArticleView(..), ProfileContainer, Profile)
 import Data.User exposing(..)
 
+import Utils exposing (..)
+
 baseUrl : String
 baseUrl =
     "https://conduit.productionready.io/api"
@@ -169,10 +171,14 @@ getFilteredArticlesByTag : String -> Int -> Http.Request Articles
 getFilteredArticlesByTag tag pageNum =
     Http.get (baseUrl ++ articlesApi ++ "?tag=" ++ tag ++ "&offset=" ++ (toString (pageNum * 20))) decodeArticles
 
-getFilteredArticlesByPage : Bool -> Int -> Http.Request Articles
-getFilteredArticlesByPage feed pageNum =
+getFilteredArticlesByPage : Maybe String -> Bool -> Int -> Http.Request Articles
+getFilteredArticlesByPage maybeToken feed pageNum =
     if feed then
-        Http.get (baseUrl ++ articlesApi ++ "/feed" ++ "?offset=" ++ (toString (pageNum * 20))) decodeArticles
+        case maybeToken of
+            Just token ->
+                authedGet (baseUrl ++ articlesApi ++ "/feed" ++ "?offset=" ++ (toString (pageNum * 20))) token decodeArticles
+            Nothing ->
+                Http.get (baseUrl ++ articlesApi ++ "?offset=" ++ (toString (pageNum * 20))) decodeArticles
     else
         Http.get (baseUrl ++ articlesApi ++ "?offset=" ++ (toString (pageNum * 20))) decodeArticles
 
