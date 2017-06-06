@@ -394,3 +394,9 @@ Started the work on getting the correct feed data
 ## June 5 2017 - 20:18 to 20:33
 I can now get the feed(even though there is nothing in it)
 I have to add an additional way of tracking the model and knowing what to highlight
+
+## June 5 2017 - 22:14 to 22:29
+Got the My Feed sort of working...Not sure about paging yet.
+There are some small differences between the markup I got from the templates and what example apps are doing.
+For example on an article and users page there is some indication it shows you how many people are following someone.
+But in the example apps that is not there.
